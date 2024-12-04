@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import toast from "react-hot-toast";
 import { AuthContext } from "../contextApi/AuthContext";
 export default function AddNewCampaign() {
   const { user } = useContext(AuthContext);
@@ -39,10 +40,17 @@ export default function AddNewCampaign() {
         },
         method: "POST",
         body: JSON.stringify(campaignData),
-      });
+      })
+        .then(() => {
+          toast.success("Campaign success to add");
+          e.target.reset();
+        })
+        .catch((err) => {
+          toast.error("Campaign failed to add");
+          console.log(err);
+        });
     }
-
-    console.log(campaignData);
+    // console.log(campaignData);
   };
   return (
     <div className=" flex items-center justify-center py-14">
@@ -60,6 +68,7 @@ export default function AddNewCampaign() {
             <input
               type="text"
               name="campaign_title"
+              required
               className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Enter campaign title"
             />
@@ -92,6 +101,7 @@ export default function AddNewCampaign() {
             <textarea
               className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500"
               rows="4"
+              required
               name="description"
               placeholder="Provide a detailed description of the campaign"
             ></textarea>
@@ -104,6 +114,7 @@ export default function AddNewCampaign() {
             <input
               type="number"
               name="goal_amount"
+              required
               className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Enter goal amount"
             />
@@ -116,6 +127,7 @@ export default function AddNewCampaign() {
             <input
               type="number"
               name="min_donation_amount"
+              required
               className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Enter minimum donation amount"
             />
@@ -128,6 +140,7 @@ export default function AddNewCampaign() {
             <input
               type="date"
               name="deadline"
+              required
               className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500"
             />
           </div>
@@ -139,6 +152,7 @@ export default function AddNewCampaign() {
             <input
               type="file"
               name="photo"
+              required
               className="w-full text-gray-600 file-input file-input-sm rounded-none file-input-bordered"
               accept="image/*"
             />
