@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import AllCampaign from "../components/AllCampaign";
 import Main from "../layouts/Main";
 import Home from "../pages/Home";
 import Login from "../pages/auth/Login";
@@ -13,6 +14,10 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/all-campaign",
+        element: <AllCampaign />,
       },
     ],
   },

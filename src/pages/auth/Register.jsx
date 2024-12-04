@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { NavLink } from "react-router-dom";
 import SocialLogin from "../../components/auth/SocialLogin";
 import { AuthContext } from "../../contextApi/AuthContext";
 
@@ -11,9 +12,8 @@ export default function Register() {
     const email = e.target.email.value;
     const password = e.target.password.value;
     epcreate(email, password)
-      .then(() => toast.success("EP account creataion success"))
+      .then()
       .catch((err) => toast.error(err.code));
-  
   };
 
   //   handleGoogleLogin
@@ -91,9 +91,9 @@ export default function Register() {
         {/* Redirect to Login */}
         <p className="text-center mt-4">
           Already have an account?{" "}
-          <a href="/auth/login" className="text-blue-500 hover:underline">
+          <NavLink to="/auth/login" className="text-blue-500 hover:underline">
             Login
-          </a>
+          </NavLink>
         </p>
       </div>
     </div>

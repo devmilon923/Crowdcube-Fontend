@@ -7,18 +7,18 @@ export default function SocialLogin() {
 
   const handleGitHubLogin = () => {
     githubLogin()
-      .then(() => toast.success("Github login success"))
+      .then()
       .catch((err) => toast.error(err.code));
   };
 
   const handleFacebookLogin = () => {
     facebookLogin()
-      .then(() => toast.success("Facebook login success"))
+      .then()
       .catch((err) => toast.error(err.code));
   };
   const handleGoogleLogin = () => {
     googleLogin()
-      .then(() => toast.success("Google login success"))
+      .then()
       .catch((err) => toast.error(err.message));
   };
   return (
