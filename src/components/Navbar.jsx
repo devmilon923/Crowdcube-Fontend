@@ -11,19 +11,19 @@ export default function Navbar() {
         <NavLink to={"/"}>Home</NavLink>
       </li>
       <li>
-        <NavLink to={"/all-campaign"}>All Campaign</NavLink>
+        <NavLink to={"/campaign/all"}>All Campaign</NavLink>
       </li>
       {user && (
         <>
           <li>
-            <NavLink>Add New Campaign</NavLink>
+            <NavLink to={"/campaign/add"}>Add New Campaign</NavLink>
           </li>
           <li>
-            <NavLink>My Campaign</NavLink>
+            <NavLink to={"/campaign/me"}>My Campaign</NavLink>
           </li>
 
           <li>
-            <NavLink>My Donations</NavLink>
+            <NavLink to={"/donations/me"}>My Donations</NavLink>
           </li>
         </>
       )}
