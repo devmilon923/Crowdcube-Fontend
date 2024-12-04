@@ -6,6 +6,7 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signOut,
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../firebase/firebaseSDK";
@@ -49,6 +50,10 @@ export const ContextProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
+  const logout = (email, password) => {
+    return signOut(auth);
+  };
+
   console.log(user);
   return (
     <AuthContext.Provider
@@ -60,6 +65,7 @@ export const ContextProvider = ({ children }) => {
         githubLogin,
         epcreate,
         eplogin,
+        logout,
       }}
     >
       {children}
