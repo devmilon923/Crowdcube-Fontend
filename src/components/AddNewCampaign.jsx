@@ -1,13 +1,57 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../contextApi/AuthContext";
+export default function AddNewCampaign() {
+  const { user } = useContext(AuthContext);
+  const [campaign, setCampaign] = useState({});
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const photo = e.target.photo.files;
+    if (photo.length === 0) return console.log("File not found");
+    const data = new FormData();
+    data.append("file", photo[0]);
+    data.append("upload_preset", "crowdcube");
+    data.append("cloud_name", "dotcx4o6h");
+    const response = await fetch(
+      "https://api.cloudinary.com/v1_1/dotcx4o6h/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const photourl = await response.json();
+    const campaignData = {
+      title: e.target.campaign_title.value,
+      description: e.target.description.value,
+      goal_amount: e.target.goal_amount.value,
+      min_donation: e.target.min_donation_amount.value,
+      deadline: e.target.deadline.value,
+      campaign_type: e.target.campaign_type.value,
+      user_uid: user?.uid,
+      photoUrl: photourl.url,
+      user_name: user?.displayName,
+      user_email: user?.email,
+    };
 
-const AddNewCampaign = () => {
+    if (photourl) {
+      fetch(`${import.meta.env.VITE_apiUrl}/campaign/add`, {
+        headers: {
+          "Content-type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify(campaignData),
+      });
+    }
+
+    console.log(campaignData);
+  };
   return (
     <div className=" flex items-center justify-center py-14">
       <div className="max-w-3xl w-full bg-white rounded-lg shadow-sm md:border p-2 md:p-8">
         <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">
           Add New Campaign
         </h1>
-        <form>
+
+        <form onSubmit={handleSubmit}>
           {/* Campaign Title */}
           <div className="mb-4">
             <label className="block text-sm font-semibold text-gray-600 mb-1">
@@ -15,9 +59,30 @@ const AddNewCampaign = () => {
             </label>
             <input
               type="text"
+              name="campaign_title"
               className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Enter campaign title"
             />
+          </div>
+          {/* Campaign Category */}
+          <div className="mb-4">
+            <label className="block text-sm font-semibold text-gray-600 mb-1">
+              Campaign Type
+            </label>
+            <select
+              required
+              name="campaign_type"
+              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500"
+            >
+              <option defaultValue="" disabled selected>
+                Select a category
+              </option>
+              <option>Health</option>
+              <option>Education</option>
+              <option>Environment</option>
+              <option>Disaster Relief</option>
+              <option>Other</option>
+            </select>
           </div>
           {/* Campaign Description */}
           <div className="mb-4">
@@ -27,6 +92,7 @@ const AddNewCampaign = () => {
             <textarea
               className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500"
               rows="4"
+              name="description"
               placeholder="Provide a detailed description of the campaign"
             ></textarea>
           </div>
@@ -37,8 +103,21 @@ const AddNewCampaign = () => {
             </label>
             <input
               type="number"
+              name="goal_amount"
               className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Enter goal amount"
+            />
+          </div>
+          {/* Goal Amount */}
+          <div className="mb-4">
+            <label className="block text-sm font-semibold text-gray-600 mb-1">
+              Min Amount ($)
+            </label>
+            <input
+              type="number"
+              name="min_donation_amount"
+              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500"
+              placeholder="Enter minimum donation amount"
             />
           </div>
           {/* Deadline */}
@@ -48,6 +127,7 @@ const AddNewCampaign = () => {
             </label>
             <input
               type="date"
+              name="deadline"
               className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500"
             />
           </div>
@@ -58,9 +138,14 @@ const AddNewCampaign = () => {
             </label>
             <input
               type="file"
-              className="w-full text-gray-600"
+              name="photo"
+              className="w-full text-gray-600 file-input file-input-sm rounded-none file-input-bordered"
               accept="image/*"
             />
+          </div>
+          <div className="p-3 bg-green-50 border my-4">
+            <p className="text-sm">Name: {user?.displayName}</p>
+            <p className="text-sm">Email: {user?.email}</p>
           </div>
           {/* Submit Button */}
           <button
@@ -73,6 +158,4 @@ const AddNewCampaign = () => {
       </div>
     </div>
   );
-};
-
-export default AddNewCampaign;
+}
