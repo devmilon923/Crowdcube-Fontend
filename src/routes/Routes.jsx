@@ -20,6 +20,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/campaign/all",
+        loader: () => fetch(`${import.meta.env.VITE_apiUrl}/campaign/all`),
         element: <AllCampaign />,
       },
       {
