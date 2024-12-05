@@ -20,6 +20,8 @@ export default function UpdateCampaign() {
     e.preventDefault();
 
     const photo = e.target.photo.files;
+    if (currentData?.user_uid !== user?.uid)
+      return toast.error("Access denied");
     if (photo.length === 0) {
       const campaignData = {
         title: e.target.campaign_title.value,
@@ -43,12 +45,11 @@ export default function UpdateCampaign() {
         body: JSON.stringify(campaignData),
       })
         .then(() => {
-          toast.success("Campaign success to add");
-          e.target.reset();
+          return toast.success("Campaign success to add");
         })
         .catch((err) => {
           toast.error("Campaign failed to add");
-          console.log(err);
+          return console.log(err);
         });
     } else {
       // Image upload start to cloudinary =============
@@ -87,12 +88,11 @@ export default function UpdateCampaign() {
           body: JSON.stringify(campaignData),
         })
           .then(() => {
-            toast.success("Campaign success to add");
-            e.target.reset();
+            return toast.success("Campaign success to update");
           })
           .catch((err) => {
-            toast.error("Campaign failed to add");
-            console.log(err);
+            toast.error("Campaign failed to update");
+            return console.log(err);
           });
       } else {
         return toast.error("Try again");
