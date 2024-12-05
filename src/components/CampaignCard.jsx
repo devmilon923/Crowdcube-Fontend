@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../contextApi/AuthContext";
 
 const CampaignCard = ({ campaign }) => {
+  const { user } = useContext(AuthContext);
+
   return (
     <div className=" bg-white border rounded-lg shadow-sm overflow-hidden hover:shadow-md hover:-translate-y-1 transition-all duration-300">
       {/* Campaign Image */}
@@ -33,14 +36,37 @@ const CampaignCard = ({ campaign }) => {
           <span className="font-medium">$10,000</span>
         </p>
         {/* Button */}
-        <div className="">
-          <NavLink
-            to={"/campaign/details/543"}
-            className="w-full btn bg-green-500 text-white text-sm font-semibold rounded-lg hover:bg-green-600 transition duration-300"
-          >
-            See More
-          </NavLink>
-        </div>
+        {user?.uid === campaign.user_uid ? (
+          <div className="grid grid-cols-3 gap-3">
+            <NavLink
+              to={"/campaign/details/543"}
+              className="w-full btn btn-sm text-xs bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition duration-300"
+            >
+              Details
+            </NavLink>
+            <NavLink
+              to={"/campaign/details/543"}
+              className="w-full btn btn-sm text-xs bg-emerald-500 text-white font-semibold rounded-lg hover:bg-green-600 transition duration-300"
+            >
+              Edit
+            </NavLink>
+            <NavLink
+              to={"/campaign/details/543"}
+              className="w-full btn btn-sm text-xs bg-red-500 text-white text-semibold rounded-lg hover:bg-green-600 transition duration-300"
+            >
+              Delete
+            </NavLink>
+          </div>
+        ) : (
+          <div className="">
+            <NavLink
+              to={"/campaign/details/543"}
+              className="w-full btn bg-green-500 text-white text-sm font-semibold rounded-lg hover:bg-green-600 transition duration-300"
+            >
+              See More
+            </NavLink>
+          </div>
+        )}
       </div>
     </div>
   );
