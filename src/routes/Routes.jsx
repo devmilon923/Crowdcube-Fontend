@@ -4,6 +4,7 @@ import AllCampaign from "../components/AllCampaign";
 import CampaignDetails from "../components/CampaignDetails";
 import MyCampaign from "../components/MyCampaign";
 import MyDonations from "../components/MyDonations";
+import UpdateCampaign from "../components/UpdateCampaign";
 import Main from "../layouts/Main";
 import Home from "../pages/Home";
 import Login from "../pages/auth/Login";
@@ -47,6 +48,16 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <CampaignDetails />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/campaign/update/:id",
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_apiUrl}/campaign/${params.id}`),
+        element: (
+          <PrivateRoute>
+            <UpdateCampaign />
           </PrivateRoute>
         ),
       },

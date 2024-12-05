@@ -39,13 +39,13 @@ const CampaignCard = ({ campaign }) => {
         {user?.uid === campaign.user_uid ? (
           <div className="grid grid-cols-3 gap-3">
             <NavLink
-              to={"/campaign/details/543"}
+              to={`/campaign/details/${campaign._id}`}
               className="w-full btn btn-sm text-xs bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition duration-300"
             >
               Details
             </NavLink>
             <NavLink
-              to={"/campaign/details/543"}
+              to={`/campaign/update/${campaign._id}`}
               className="w-full btn btn-sm text-xs bg-emerald-500 text-white font-semibold rounded-lg hover:bg-green-600 transition duration-300"
             >
               Edit
