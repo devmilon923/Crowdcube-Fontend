@@ -33,12 +33,14 @@ const CampaignCard = () => {
           <span className="font-medium">$10,000</span>
         </p>
         {/* Button */}
-        <NavLink
-          to={"/campaign/details/543"}
-          className="w-full btn bg-green-500 text-white text-sm font-semibold rounded-lg hover:bg-green-600 transition duration-300"
-        >
-          See More
-        </NavLink>
+        <div className="">
+          <NavLink
+            to={"/campaign/details/543"}
+            className="w-full btn bg-green-500 text-white text-sm font-semibold rounded-lg hover:bg-green-600 transition duration-300"
+          >
+            See More
+          </NavLink>
+        </div>
       </div>
     </div>
   );
