@@ -7,7 +7,23 @@ export default function AddNewCampaign() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const photo = e.target.photo.files;
-    if (photo.length === 0) return console.log("File not found");
+    if (
+      e.target.campaign_title.value.trim() === "" ||
+      e.target.description.value.trim() === "" ||
+      e.target.campaign_type.value.trim() === ""
+    ) {
+      return toast.error("Empty space are not allowed");
+    }
+
+    if (parseInt(e.target.goal_amount.value) <= 0)
+      return toast.error("Invalid goal amount");
+
+    if (
+      parseInt(e.target.goal_amount.value) <
+      parseInt(e.target.min_donation_amount.value)
+    )
+      return toast.error("Minimum donation amount to high");
+    if (photo.length === 0) return;
     const data = new FormData();
     data.append("file", photo[0]);
     data.append("upload_preset", "crowdcube");
@@ -21,16 +37,16 @@ export default function AddNewCampaign() {
     );
     const photourl = await response.json();
     const campaignData = {
-      title: e.target.campaign_title.value,
-      description: e.target.description.value,
+      title: e.target.campaign_title.value.trim(),
+      description: e.target.description.value.trim(),
       goal_amount: e.target.goal_amount.value,
       min_donation: e.target.min_donation_amount.value,
       deadline: e.target.deadline.value,
-      campaign_type: e.target.campaign_type.value,
+      campaign_type: e.target.campaign_type.value.trim(),
       user_uid: user?.uid,
       photoUrl: photourl.url,
-      user_name: user?.displayName,
-      user_email: user?.email,
+      user_name: user?.displayName.trim(),
+      user_email: user?.email.trim(),
     };
 
     if (photourl) {

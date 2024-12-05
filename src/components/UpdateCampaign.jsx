@@ -14,11 +14,23 @@ export default function UpdateCampaign() {
     }
   }, [result, setCurrentData]);
 
-  // console.log(currentData);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (
+      e.target.campaign_title.value.trim() === "" ||
+      e.target.description.value.trim() === "" ||
+      e.target.campaign_type.value.trim() === ""
+    ) {
+      return toast.error("Empty space are not allowed");
+    }
+    if (parseInt(e.target.goal_amount.value) <= 0)
+      return toast.error("Invalid goal amount");
 
+    if (
+      parseInt(e.target.goal_amount.value) <
+      parseInt(e.target.min_donation_amount.value)
+    )
+      return toast.error("Minimum donation amount to high");
     const photo = e.target.photo.files;
     if (currentData?.user_uid !== user?.uid)
       return toast.error("Access denied");

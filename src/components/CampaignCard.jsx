@@ -1,12 +1,98 @@
 import React, { useContext } from "react";
+import toast from "react-hot-toast";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../contextApi/AuthContext";
+import { DataContext } from "../contextApi/DataContext";
 
 const CampaignCard = ({ campaign }) => {
-  const { user } = useContext(AuthContext);
+  const need = campaign?.goal_amount;
+  const balance = campaign?.current_balance;
+  const percentage = (balance / need) * 100;
 
+  const { setMyCampaigns, myCampaigns, setAllCampaigns, allCampaigns } =
+    useContext(DataContext);
+  const { user } = useContext(AuthContext);
+  const handleDelete = (id) => {
+    console.log(id);
+    document.getElementById("my_modal_1").showModal();
+  };
+  const confrimBtn = async (e) => {
+    e.preventDefault();
+    const id = campaign._id;
+    fetch(`${import.meta.env.VITE_apiUrl}/campaign/remove/${campaign._id}`)
+      .then(() => {
+        document.getElementById("close").click();
+        const updatedData = myCampaigns.filter((up) => up._id !== id);
+        const allupdatedData = allCampaigns.filter((all) => all._id !== id);
+        setMyCampaigns(updatedData);
+        setAllCampaigns(allupdatedData);
+
+        return toast.success("This data success to delete");
+      })
+      .catch((err) => {
+        console.log(err);
+        return toast.error("This data failed to delete");
+      });
+  };
+  const showUserInfo = () => {
+    document.getElementById("my_modal_2").showModal();
+  };
   return (
     <div className=" bg-white border rounded-lg shadow-sm overflow-hidden hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+      <dialog id="my_modal_1" className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Hello!</h3>
+          <p className="py-4">
+            Press ESC key or click the button below to close
+          </p>
+          <div className="modal-action">
+            <form method="dialog" className="space-x-2">
+              {/* if there is a button in form, it will close the modal */}
+              <button id="close" className="btn">
+                Close
+              </button>
+              <button
+                onClick={confrimBtn}
+                className="btn bg-red-500 text-white"
+              >
+                Confrim
+              </button>
+            </form>
+          </div>
+        </div>
+      </dialog>
+      <dialog id="my_modal_2" className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg text-center">Raiser Information</h3>
+          <div className="py-4 flex flex-col items-center">
+            {/* User Image */}
+
+            {/* User Details */}
+            <div className="text-center">
+              <p className="font-semibold text-lg">
+                Name: {campaign?.user_name}
+              </p>
+              <p className="text-gray-600">Email: {campaign?.user_email}</p>
+              <p className="text-sm text-gray-500 mt-2">
+                {campaign?.createdAt}
+              </p>
+            </div>
+          </div>
+          <div className="modal-action justify-center space-x-4">
+            {/* Close Button */}
+            <form method="dialog">
+              <button
+                id="close"
+                className="btn bg-neutral outline-none text-white hover:bg-slate-800"
+              >
+                Close
+              </button>
+            </form>
+            {/* Confirm Button */}
+          </div>
+        </div>
+      </dialog>
+
       {/* Campaign Image */}
       <img
         src="https://via.placeholder.com/300x200"
@@ -22,18 +108,29 @@ const CampaignCard = ({ campaign }) => {
         {/* Deadline */}
         <p className="text-sm text-gray-600 mb-4">
           Deadline:{" "}
-          <span className="font-medium text-gray-800">15 Dec 2024</span>
+          <span className="font-medium text-gray-800">
+            {new Date(campaign?.deadline).toISOString().split("T")[0]}
+          </span>
         </p>
         {/* Progress Bar */}
         <div className="bg-gray-200 h-2 rounded-full mb-2">
           <div
             className="bg-green-500 h-full rounded-full"
-            style={{ width: "70%" }}
+            style={{ width: `${percentage}%` }}
           ></div>
         </div>
-        <p className="text-sm text-gray-600 mb-4">
-          Raised: <span className="font-medium">$4,000</span> of{" "}
-          <span className="font-medium">$10,000</span>
+        <p className="text-sm text-gray-600 mb-2">
+          Raised: <span className="font-medium">${balance}</span> of{" "}
+          <span className="font-medium">${need}</span>
+        </p>
+        <p className="text-sm text-gray-600 mb-2 ">
+          Name:{" "}
+          <span
+            onClick={showUserInfo}
+            className="hover:underline cursor-pointer"
+          >
+            {campaign?.user_name}
+          </span>
         </p>
         {/* Button */}
         {user?.uid === campaign.user_uid ? (
@@ -50,12 +147,12 @@ const CampaignCard = ({ campaign }) => {
             >
               Edit
             </NavLink>
-            <NavLink
-              to={"/campaign/details/543"}
+            <button
+              onClick={handleDelete}
               className="w-full btn btn-sm text-xs bg-red-500 text-white text-semibold rounded-lg hover:bg-green-600 transition duration-300"
             >
               Delete
-            </NavLink>
+            </button>
           </div>
         ) : (
           <div className="">
