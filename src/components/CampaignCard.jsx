@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const CampaignCard = () => {
+const CampaignCard = ({ campaign }) => {
   return (
     <div className=" bg-white border rounded-lg shadow-sm overflow-hidden hover:shadow-md hover:-translate-y-1 transition-all duration-300">
       {/* Campaign Image */}
@@ -14,7 +14,7 @@ const CampaignCard = () => {
       <div className="p-4">
         {/* Title */}
         <h3 className="text-lg font-semibold text-gray-800 mb-2">
-          Support Children's Education
+          {campaign.campaign_title}
         </h3>
         {/* Deadline */}
         <p className="text-sm text-gray-600 mb-4">
