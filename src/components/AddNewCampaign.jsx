@@ -1,9 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../contextApi/AuthContext";
 export default function AddNewCampaign() {
   const { user } = useContext(AuthContext);
-  const [campaign, setCampaign] = useState({});
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const photo = e.target.photo.files;

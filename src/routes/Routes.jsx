@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import AddNewCampaign from "../components/AddNewCampaign";
 import AllCampaign from "../components/AllCampaign";
 import CampaignDetails from "../components/CampaignDetails";
+import MyCampaign from "../components/MyCampaign";
 import Main from "../layouts/Main";
 import Home from "../pages/Home";
 import Login from "../pages/auth/Login";
@@ -22,6 +23,10 @@ export const router = createBrowserRouter([
         path: "/campaign/all",
         loader: () => fetch(`${import.meta.env.VITE_apiUrl}/campaign/all`),
         element: <AllCampaign />,
+      },
+      {
+        path: "/campaign/me",
+        element: <MyCampaign />,
       },
       {
         path: "/campaign/details/:id",
