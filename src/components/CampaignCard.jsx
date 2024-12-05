@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../contextApi/AuthContext";
@@ -8,12 +8,20 @@ const CampaignCard = ({ campaign }) => {
   const need = campaign?.goal_amount;
   const balance = campaign?.current_balance;
   const percentage = (balance / need) * 100;
-
+  const [deadline, setDeadline] = useState(null);
   const { setMyCampaigns, myCampaigns, setAllCampaigns, allCampaigns } =
     useContext(DataContext);
   const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    const currentTime = new Date().toISOString();
+    if (currentTime < campaign?.deadline) {
+      return setDeadline(true);
+    } else {
+      return setDeadline(false);
+    }
+  }, [campaign?.deadline]);
   const handleDelete = (id) => {
-    console.log(id);
     document.getElementById("my_modal_1").showModal();
   };
   const confrimBtn = async (e) => {
@@ -97,7 +105,7 @@ const CampaignCard = ({ campaign }) => {
 
       {/* Campaign Image */}
       <img
-        src="https://via.placeholder.com/300x200"
+        src={campaign?.thumbnail}
         alt="Campaign Thumbnail"
         className="w-full h-48 object-cover"
       />
@@ -139,12 +147,14 @@ const CampaignCard = ({ campaign }) => {
         {/* Button */}
         {user?.uid === campaign.user_uid ? (
           <div className="grid grid-cols-3 gap-3">
-            <NavLink
-              to={`/campaign/details/${campaign._id}`}
+            <button
+              disabled
               className="w-full btn btn-sm text-xs bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition duration-300"
             >
-              Details
-            </NavLink>
+              <NavLink to={`/campaign/details/${campaign._id}`}>
+                {deadline ? "Details" : "Ended"}
+              </NavLink>
+            </button>
             <NavLink
               to={`/campaign/update/${campaign._id}`}
               className="w-full btn btn-sm text-xs bg-emerald-500 text-white font-semibold rounded-lg hover:bg-green-600 transition duration-300"
@@ -162,7 +172,7 @@ const CampaignCard = ({ campaign }) => {
           <div className="">
             <NavLink
               to={`/campaign/details/${campaign._id}`}
-              className="w-full btn bg-green-500 text-white text-sm font-semibold rounded-lg hover:bg-green-600 transition duration-300"
+              className="w-full btn bg-green-500 btn-sm text-white font-semibold rounded-md text-xs hover:bg-green-600 transition duration-300"
             >
               See More
             </NavLink>

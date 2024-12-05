@@ -6,6 +6,7 @@ import { AuthContext } from "../contextApi/AuthContext";
 const CampaignDetails = () => {
   const { user } = useContext(AuthContext);
   const [details, setDetails] = useState(null);
+  const [deadline, setDeadline] = useState(null);
   const result = useLoaderData();
   useEffect(() => {
     if (result.data) {
@@ -17,11 +18,24 @@ const CampaignDetails = () => {
   const need = details?.goal_amount;
   const balance = details?.current_balance;
   const percentage = (balance / need) * 100;
+
+  useEffect(() => {
+    const currentTime = new Date().toISOString();
+    if (currentTime < details?.deadline) {
+      return setDeadline(true);
+    } else {
+      return setDeadline(false);
+    }
+  }, [details?.deadline]);
+
   const handleDonate = async (e) => {
     e.preventDefault();
     const amount = e.target.amount.value;
+    if (!deadline) return toast.error("Deadline is over for this campaign");
     if (details?.user_uid === user?.uid)
       return toast.error("You can't donate your own campaign");
+
+    if (need - balance < amount) return toast.error(`Your amount is to high!`);
     if (amount > need) return toast.error("Your donation amount too high");
     await fetch(`${import.meta.env.VITE_apiUrl}/campaign/donate`, {
       headers: {
@@ -31,6 +45,7 @@ const CampaignDetails = () => {
       body: JSON.stringify({
         campaign_id: details?._id,
         campaign_title: details?.campaign_title,
+        campaign_type: details?.campaign_type,
         amount: amount,
         user_uid: user?.uid,
         user_name: user?.displayName.trim(),
@@ -107,6 +122,7 @@ const CampaignDetails = () => {
                 />
               </div>
               <button
+                disabled={!deadline}
                 type="submit"
                 className="w-full btn bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition duration-300"
               >
