@@ -45,6 +45,8 @@ export const router = createBrowserRouter([
       },
       {
         path: "/campaign/details/:id",
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_apiUrl}/campaign/${params.id}`),
         element: (
           <PrivateRoute>
             <CampaignDetails />

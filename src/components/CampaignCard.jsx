@@ -111,7 +111,9 @@ const CampaignCard = ({ campaign }) => {
         <p className="text-sm text-gray-600 mb-4">
           Deadline:{" "}
           <span className="font-medium text-gray-800">
-            {new Date(campaign?.deadline).toISOString().split("T")[0]}
+            {campaign?.deadline
+              ? new Date(campaign.deadline).toISOString().split("T")[0]
+              : "N/A"}
           </span>
         </p>
         {/* Progress Bar */}
@@ -159,7 +161,7 @@ const CampaignCard = ({ campaign }) => {
         ) : (
           <div className="">
             <NavLink
-              to={"/campaign/details/543"}
+              to={`/campaign/details/${campaign._id}`}
               className="w-full btn bg-green-500 text-white text-sm font-semibold rounded-lg hover:bg-green-600 transition duration-300"
             >
               See More
