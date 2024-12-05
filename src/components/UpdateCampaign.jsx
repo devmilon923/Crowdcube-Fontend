@@ -33,7 +33,7 @@ export default function UpdateCampaign() {
       return toast.error("Minimum donation amount to high");
     const photo = e.target.photo.files;
     if (currentData?.user_uid !== user?.uid)
-      return toast.error("Access denied");
+      return toast.error("Access denied! Only the owner can update.");
     if (photo.length === 0) {
       const campaignData = {
         title: e.target.campaign_title.value,

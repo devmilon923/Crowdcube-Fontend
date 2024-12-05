@@ -19,6 +19,8 @@ const CampaignCard = ({ campaign }) => {
   const confrimBtn = async (e) => {
     e.preventDefault();
     const id = campaign._id;
+    if (campaign?.user_uid !== user?.uid)
+      return toast.error("Access denied! Only the owner can delete.");
     fetch(`${import.meta.env.VITE_apiUrl}/campaign/remove/${campaign._id}`)
       .then(() => {
         document.getElementById("close").click();
