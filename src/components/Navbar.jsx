@@ -35,8 +35,8 @@ export default function Navbar() {
       .catch((err) => toast.error(err.code));
   };
   return (
-    <div>
-      <div className="navbar bg-base-100">
+    <div className="fixed w-full top-0 bg-gray-50 border">
+      <div className="navbar container mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
             <div

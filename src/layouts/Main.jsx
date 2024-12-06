@@ -8,7 +8,7 @@ export default function Main() {
     <div>
       <Toaster position="top-center" reverseOrder={false} />
       <Navbar />
-      <div className="container mx-auto px-3">
+      <div className="container mx-auto px-3 pt-24">
         <Outlet />
       </div>
       <Footer />
