@@ -135,24 +135,26 @@ const CampaignCard = ({ campaign }) => {
           Raised: <span className="font-medium">${balance}</span> of{" "}
           <span className="font-medium">${need}</span>
         </p>
+
         <p className="text-sm text-gray-600 mb-2 ">
-          Name:{" "}
+          Status:{" "}
           <span
             onClick={showUserInfo}
             className="hover:underline cursor-pointer"
           >
-            {campaign?.user_name}
+            {deadline ? (
+              <span className="text-green-500 font-semibold">Active</span>
+            ) : (
+              <span className="text-yellow-500 font-semibold">Expire</span>
+            )}
           </span>
         </p>
         {/* Button */}
         {user?.uid === campaign.user_uid ? (
           <div className="grid grid-cols-3 gap-3">
-            <button
-              disabled
-              className="w-full btn btn-sm text-xs bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition duration-300"
-            >
+            <button className="w-full btn btn-sm text-xs bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition duration-300">
               <NavLink to={`/campaign/details/${campaign._id}`}>
-                {deadline ? "Details" : "Ended"}
+                Details
               </NavLink>
             </button>
             <NavLink

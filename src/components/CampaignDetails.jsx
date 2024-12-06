@@ -76,13 +76,19 @@ const CampaignDetails = () => {
         {/* Content */}
         <div className="border p-2 md:p-8">
           {/* Title */}
-          <h1 className="text-2xl font-bold text-gray-800 mb-4">
+          <h1 className="md:text-2xl text-xl font-bold text-gray-800 mb-4">
             {details?.campaign_title}
           </h1>
           {/* Campaign Details */}
           <p className="text-gray-600 mb-4">{details?.description}</p>
+          <p className="text-gray-600 mb-1 font-bold text-sm">
+            Name: <span className="font-normal">{details?.user_name}</span>
+          </p>
+          <p className="text-gray-600 mb-4 font-bold text-sm">
+            Email: <span className="font-normal">{details?.user_email}</span>
+          </p>
           {/* Stats */}
-          <div className="flex flex-col sm:flex-row justify-between items-center mb-4">
+          <div className="flex flex-col sm:flex-row justify-between md:items-center mb-4">
             <p className="text-sm text-gray-600">
               <strong className="text-gray-800">Goal:</strong> ${need}
             </p>
@@ -121,13 +127,34 @@ const CampaignDetails = () => {
                   placeholder="Enter amount"
                 />
               </div>
-              <button
-                disabled={!deadline}
-                type="submit"
-                className="w-full btn bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition duration-300"
-              >
-                Donate Now
-              </button>
+              {deadline ? (
+                <div>
+                  {details?.user_uid === user?.uid ? (
+                    <button
+                      disabled
+                      type="submit"
+                      className="w-full btn bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition duration-300"
+                    >
+                      Your campaign
+                    </button>
+                  ) : (
+                    <button
+                      type="submit"
+                      className="w-full btn bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition duration-300"
+                    >
+                      Donate Now
+                    </button>
+                  )}
+                </div>
+              ) : (
+                <button
+                  disabled={!deadline}
+                  type="submit"
+                  className="w-full btn bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition duration-300"
+                >
+                  Campaign Ended
+                </button>
+              )}
             </form>
           </div>
         </div>

@@ -27,16 +27,16 @@ export default function MyDonations() {
 
   return (
     <div className="min-h-fit shadow-sm">
-      {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
         <div className="overflow-x-auto">
           <Table striped>
             <Table.Head>
-              <Table.HeadCell>Campaign title</Table.HeadCell>
-              <Table.HeadCell>Category</Table.HeadCell>
+              <Table.HeadCell>Campaign ID</Table.HeadCell>
+              <Table.HeadCell>Campaign name</Table.HeadCell>
+              <Table.HeadCell>Campaign type</Table.HeadCell>
               <Table.HeadCell>Raiser Name</Table.HeadCell>
               <Table.HeadCell>Amount</Table.HeadCell>
-              <Table.HeadCell>Donate Time</Table.HeadCell>
+              <Table.HeadCell>Donated At</Table.HeadCell>
             </Table.Head>
             <Table.Body className="divide-y">
               {data?.donations?.map((donation, index) => (
@@ -45,8 +45,9 @@ export default function MyDonations() {
                   className="bg-white dark:border-gray-700 dark:bg-gray-800"
                 >
                   <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                    {donation.campaign_title}
+                    {donation._id}
                   </Table.Cell>
+                  <Table.Cell>{donation.campaign_title}</Table.Cell>
                   <Table.Cell>{donation.campaign_type}</Table.Cell>
                   <Table.Cell>{donation.user_name}</Table.Cell>
                   <Table.Cell className="text-green-500 font-bold">
