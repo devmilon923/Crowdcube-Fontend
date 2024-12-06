@@ -26,8 +26,8 @@ export default function MyDonations() {
   }, [user?.uid, location.pathname]); // Dependency array
 
   return (
-    <div className="min-h-fit shadow-sm">
-      <main className="container mx-auto px-4 py-8">
+    <div className="min-h-fit shadow-sm border">
+      <main className="container mx-auto px-4 py-8 ">
         <div className="overflow-x-auto">
           <Table striped>
             <Table.Head>
@@ -42,7 +42,7 @@ export default function MyDonations() {
               {data?.donations?.map((donation, index) => (
                 <Table.Row
                   key={index}
-                  className="bg-white dark:border-gray-700 dark:bg-gray-800"
+                  className="bg-white dark:border-gray-700  dark:bg-gray-800"
                 >
                   <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                     {donation._id}

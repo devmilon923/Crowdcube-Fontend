@@ -65,7 +65,7 @@ const CampaignDetails = () => {
       });
   };
   return (
-    <div className=" min-h-screen py-10">
+    <div className=" min-h-screen pb-14">
       <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-sm md:border-none border overflow-hidden">
         {/* Image */}
         <img

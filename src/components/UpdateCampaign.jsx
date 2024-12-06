@@ -112,7 +112,7 @@ export default function UpdateCampaign() {
     }
   };
   return (
-    <div className=" flex items-center justify-center py-14">
+    <div className=" flex items-center justify-center pb-14">
       <div className="max-w-3xl w-full bg-white rounded-lg shadow-sm md:border p-2 md:p-8">
         <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">
           Update Campaign

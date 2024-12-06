@@ -152,22 +152,24 @@ const CampaignCard = ({ campaign }) => {
         {/* Button */}
         {user?.uid === campaign.user_uid ? (
           <div className="grid grid-cols-3 gap-3">
-            <button className="w-full btn btn-sm text-xs bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition duration-300">
-              <NavLink to={`/campaign/details/${campaign._id}`}>
-                Details
-              </NavLink>
-            </button>
+            <NavLink
+              className="className=w-full btn btn-sm text-xs bg-white border shadow-sm  text-green-600 font-semibold rounded-md hover:bg-green-300 transition duration-300"
+              to={`/campaign/details/${campaign._id}`}
+            >
+              <i class="fa-regular fa-eye"></i>
+            </NavLink>
+
             <NavLink
               to={`/campaign/update/${campaign._id}`}
-              className="w-full btn btn-sm text-xs bg-emerald-500 text-white font-semibold rounded-lg hover:bg-green-600 transition duration-300"
+              className="w-full btn btn-sm text-xs bg-white border shadow-sm text-emerald-600 font-semibold rounded-md hover:bg-green-300 transition duration-300"
             >
-              Edit
+              <i class="fa-regular fa-pen-to-square"></i>
             </NavLink>
             <button
               onClick={handleDelete}
-              className="w-full btn btn-sm text-xs bg-red-500 text-white text-semibold rounded-lg hover:bg-green-600 transition duration-300"
+              className="w-full btn btn-sm text-xs bg-white border shadow-sm  text-red-600 text-semibold rounded-md hover:bg-green-300 transition duration-300"
             >
-              Delete
+              <i class="fa-solid fa-trash-arrow-up"></i>
             </button>
           </div>
         ) : (

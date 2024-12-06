@@ -17,7 +17,7 @@ export default function AllCampaign() {
   }, [result]);
 
   return (
-    <div className="min-h-fit shadow-sm ">
+    <div className="min-h-fit shadow-sm border">
       <main className="container mx-auto px-4 py-8">
         <div className="overflow-x-auto">
           <Table striped>
