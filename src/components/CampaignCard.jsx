@@ -48,7 +48,7 @@ const CampaignCard = ({ campaign }) => {
     document.getElementById("my_modal_2").showModal();
   };
   return (
-    <div className=" bg-white border rounded-lg shadow-sm overflow-hidden hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+    <div className=" from-white via-green-100 to-white bg-gradient-to-r border rounded-lg shadow-sm overflow-hidden hover:shadow-md hover:-translate-y-1 transition-all duration-300">
       <dialog id="my_modal_1" className="modal">
         <div className="modal-box">
           <h3 className="font-bold text-lg">Hello!</h3>
