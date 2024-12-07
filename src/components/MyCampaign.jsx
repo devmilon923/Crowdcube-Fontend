@@ -24,7 +24,7 @@ export default function MyCampaign() {
   }
   console.log(myCampaigns);
   return (
-    <div className="grid grid-cols-3 gap-5 items-center justify-between py-14">
+    <div className="grid grid-cols-3 gap-5 items-center justify-between pb-14">
       {myCampaigns
         ? myCampaigns.map((campaign) => (
             <CampaignCard campaign={campaign} key={campaign._id} />

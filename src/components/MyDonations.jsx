@@ -1,4 +1,3 @@
-import { Table } from "flowbite-react";
 import React, { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { AuthContext } from "../contextApi/AuthContext";
@@ -24,48 +23,57 @@ export default function MyDonations() {
         .catch((err) => console.log(err));
     }
   }, [user?.uid, location.pathname]); // Dependency array
-
+  console.log(data);
   return (
-    <div className="min-h-fit shadow-sm border">
-      <main className="container mx-auto px-4 py-8 ">
-        <div className="overflow-x-auto">
-          <Table striped>
-            <Table.Head>
-              <Table.HeadCell>Campaign ID</Table.HeadCell>
-              <Table.HeadCell>Campaign name</Table.HeadCell>
-              <Table.HeadCell>Campaign type</Table.HeadCell>
-              <Table.HeadCell>Raiser Name</Table.HeadCell>
-              <Table.HeadCell>Amount</Table.HeadCell>
-              <Table.HeadCell>Donated At</Table.HeadCell>
-            </Table.Head>
-            <Table.Body className="divide-y">
-              {data?.donations?.map((donation, index) => (
-                <Table.Row
-                  key={index}
-                  className="bg-white dark:border-gray-700  dark:bg-gray-800"
-                >
-                  <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                    {donation._id}
-                  </Table.Cell>
-                  <Table.Cell>{donation.campaign_title}</Table.Cell>
-                  <Table.Cell>{donation.campaign_type}</Table.Cell>
-                  <Table.Cell>{donation.user_name}</Table.Cell>
-                  <Table.Cell className="text-green-500 font-bold">
-                    +${donation.donation_amount}
-                  </Table.Cell>
-                  <Table.Cell>
-                    {donation?.createdAt
-                      ? new Date(donation.createdAt)
-                          .toISOString()
-                          .replace("T", " ")
-                          .split(".")[0]
-                      : "N/A"}
-                  </Table.Cell>
-                </Table.Row>
-              ))}
-            </Table.Body>
-          </Table>
-        </div>
+    <div className="min-h-fit">
+      <main className="container mx-auto md:px-4 pb-8 grid lg:grid-cols-3 grid-cols-1 gap-4">
+        {data?.donations
+          ? data.donations.map((campaign) => (
+              <div className="card rounded-md bg-base-100 shadow-sm border">
+                <figure>
+                  <img
+                    className="min-h-32 object-cover bg-gray-50 w-full"
+                    src={campaign?.thumbnail}
+                    alt="Shoes"
+                  />
+                </figure>
+                <div className="card-body">
+                  <h2 className="card-title">
+                    {campaign?.campaign_title}
+                    <div className="badge bg-green-400 text-white">
+                      {" "}
+                      {campaign?.campaign_type}
+                    </div>
+                  </h2>
+                  <div>
+                    <p className="text-sm md:text-md">
+                      Amount:{" "}
+                      <span className="font-semibold">
+                        +${campaign?.donation_amount}
+                      </span>
+                    </p>
+                    <p className="text-sm md:text-md">
+                      Raiser Name:{" "}
+                      <span className="font-semibold">
+                        {campaign?.user_name}
+                      </span>
+                    </p>
+                    <p className="text-sm md:text-md">
+                      Raiser Email:{" "}
+                      <span className="font-semibold">
+                        {campaign?.user_email}
+                      </span>
+                    </p>
+                  </div>
+                  <div className="card-actions justify-start">
+                    <div className="shadow-sm border text-xs py-1 px-2 rounded-full bg-slate-50">
+                      {campaign?.createdAt}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))
+          : "No data"}
       </main>
     </div>
   );

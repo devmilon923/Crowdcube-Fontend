@@ -50,6 +50,7 @@ const CampaignDetails = () => {
         user_uid: user?.uid,
         user_name: user?.displayName.trim(),
         user_email: user?.email.trim(),
+        thumbnail: details?.thumbnail,
       }),
     })
       .then((res) => res.json())

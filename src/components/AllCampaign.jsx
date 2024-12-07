@@ -19,6 +19,16 @@ export default function AllCampaign() {
   return (
     <div className="min-h-fit shadow-sm border">
       <main className="container mx-auto px-4 py-8">
+        <div className="flex justify-between gap-2 mb-4 items-center">
+          <input
+            type="text"
+            placeholder="Search..."
+            className="input input-sm text-xs rounded-md input-bordered w-full max-w-xs"
+          />
+          <button className="btn btn-sm px-8 bg-yellow-100 hover:bg-yellow-200 border ">
+            Sort By price
+          </button>
+        </div>
         <div className="overflow-x-auto">
           <Table striped>
             <Table.Head>
