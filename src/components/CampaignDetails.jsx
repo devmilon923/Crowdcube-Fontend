@@ -67,7 +67,7 @@ const CampaignDetails = () => {
   };
   return (
     <div className=" min-h-screen pb-14">
-      <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-sm md:border-none border overflow-hidden">
+      <div className="max-w-3xl mx-auto bg-white dark:bg-slate-900 rounded-lg shadow-sm md:border-none border dark:border-slate-950 overflow-hidden">
         {/* Image */}
         <img
           src={details?.thumbnail}
@@ -75,56 +75,67 @@ const CampaignDetails = () => {
           className="w-full h-64 object-cover"
         />
         {/* Content */}
-        <div className="border p-2 md:p-8">
+        <div className="border dark:border-slate-950 p-2 md:p-8">
           {/* Title */}
-          <h1 className="md:text-2xl text-xl font-bold text-gray-800 mb-4">
+          <h1 className="md:text-2xl text-xl font-bold text-gray-800 mb-4 dark:text-slate-400">
             {details?.campaign_title}
           </h1>
           {/* Campaign Details */}
-          <p className="text-gray-600 mb-4">{details?.description}</p>
-          <p className="text-gray-600 mb-1 font-bold text-sm">
+          <p className="text-gray-600 mb-4 dark:text-slate-400">
+            {details?.description}
+          </p>
+          <p className="text-gray-600 mb-1 font-bold text-sm dark:text-slate-400">
             Name: <span className="font-normal">{details?.user_name}</span>
           </p>
-          <p className="text-gray-600 mb-4 font-bold text-sm">
+          <p className="text-gray-600 mb-4 font-bold text-sm dark:text-slate-400">
             Email: <span className="font-normal">{details?.user_email}</span>
           </p>
           {/* Stats */}
           <div className="flex flex-col sm:flex-row justify-between md:items-center mb-4">
-            <p className="text-sm text-gray-600">
-              <strong className="text-gray-800">Goal:</strong> ${need}
+            <p className="text-sm text-gray-600 dark:text-slate-400">
+              <strong className="text-gray-800 dark:text-slate-400">
+                Goal:
+              </strong>{" "}
+              ${need}
             </p>
-            <p className="text-sm text-gray-600">
-              <strong className="text-gray-800">Raised:</strong> ${balance}
+            <p className="text-sm text-gray-600 dark:text-slate-400">
+              <strong className="text-gray-800 dark:text-slate-400">
+                Raised:
+              </strong>{" "}
+              ${balance}
             </p>
-            <p className="text-sm text-gray-600">
-              <strong className="text-gray-800">Deadline:</strong>{" "}
+            <p className="text-sm text-gray-600 dark:text-slate-400">
+              <strong className="text-gray-800 dark:text-slate-400">
+                Deadline:
+              </strong>{" "}
               {details?.deadline
                 ? new Date(details.deadline).toISOString().split("T")[0]
                 : "N/A"}
             </p>
           </div>
           {/* Progress Bar */}
-          <div className="bg-gray-200 h-4 rounded-full mb-6">
+          <div className="bg-gray-200 dark:bg-slate-700 h-4 rounded-full mb-6">
             <div
-              className="bg-green-500 h-full rounded-full"
+              className="bg-green-500 dark:bg-green-600 dark:border-slate-700 h-full rounded-full"
               style={{ width: `${percentage}%` }}
             ></div>
           </div>
           {/* Donation Form */}
-          <div className="bg-gray-50 p-4 rounded-lg shadow-inner">
-            <h2 className="text-lg font-semibold text-gray-800 mb-4">
+          <div className="bg-gray-50 dark:bg-slate-900 p-4 rounded-lg shadow-inner">
+            <h2 className="text-lg font-semibold text-gray-800 mb-4 dark:text-white">
               Donate Now
             </h2>
             <form onSubmit={handleDonate}>
               <div className="mb-4">
-                <label className="block text-sm text-gray-600 mb-1">
-                  Donation Amount ($)
+                <label className="block text-sm text-gray-600 mb-1 dark:text-slate-400">
+                  Minimum Donation Amount (${details?.min_donation_amount})
                 </label>
                 <input
+                  defaultValue={details?.min_donation_amount}
                   type="number"
                   name="amount"
                   required
-                  className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="w-full dark:text-white dark:bg-slate-800 dark:border-slate-800 border border-gray-300 rounded-lg py-2 px-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500"
                   placeholder="Enter amount"
                 />
               </div>
@@ -134,14 +145,14 @@ const CampaignDetails = () => {
                     <button
                       disabled
                       type="submit"
-                      className="w-full btn bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition duration-300"
+                      className="w-full btn bg-green-500 dark:bg-green-600 dark:border-slate-700 text-white font-semibold rounded-lg hover:bg-green-600 transition duration-300"
                     >
                       Your campaign
                     </button>
                   ) : (
                     <button
                       type="submit"
-                      className="w-full btn bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition duration-300"
+                      className="w-full btn bg-green-500 dark:bg-green-600 dark:border-slate-700 text-white font-semibold rounded-lg hover:bg-green-600 transition duration-300"
                     >
                       Donate Now
                     </button>
@@ -151,7 +162,7 @@ const CampaignDetails = () => {
                 <button
                   disabled={!deadline}
                   type="submit"
-                  className="w-full btn bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition duration-300"
+                  className="w-full btn bg-green-500 dark:bg-green-600 dark:border-slate-700 text-white font-semibold rounded-lg hover:bg-green-600 transition duration-300"
                 >
                   Campaign Ended
                 </button>

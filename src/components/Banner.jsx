@@ -5,20 +5,20 @@ import { Swiper, SwiperSlide } from "swiper/react";
 export default function Banner() {
   return (
     <div>
-      <div className="w-full from-white via-emerald-100 to-white bg-gradient-to-r rounded-md border-l border-r md:px-6 lg:px-12 pt-12 md:pb-12">
+      <div className="w-full from-white dark:from-slate-900 via-emerald-100 dark:via-slate-800 to-white dark:to-slate-900 bg-gradient-to-r rounded-md border-l dark:border-l-slate-950 border-r dark:border-r-slate-950 md:px-6 lg:px-12 pt-12 md:pb-12">
         <div className="grid md:grid-cols-2 grid-cols-1 gap-6 md:gap-12 items-center">
           <div className="space-y-3 text-center md:text-start lg:px-12 px-2">
             <h1
               data-aos="fade-up"
               data-aos-delay="100"
-              className="text-2xl md:text-4xl font-extrabold text-slate-600"
+              className="text-2xl md:text-4xl font-extrabold dark:text-white text-slate-600"
             >
               Do something incredible today
             </h1>
             <p
               data-aos="fade-up"
               data-aos-delay="100"
-              className="text-slate-600 md:text-md text-sm"
+              className="text-slate-600 md:text-md text-sm dark:text-slate-400"
             >
               We Seek out world changers and difference makers around the
               globe,and equip them to fulfill their unique purpose.
@@ -41,7 +41,7 @@ export default function Banner() {
             </div>
           </div>
           <div>
-            <Swiper className="mySwiper">
+            <Swiper className="mySwiper z-0">
               <SwiperSlide>
                 <img
                   className="object-cover h-80 w-full rounded-md"

@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { NavLink } from "react-router-dom";
 import SocialLogin from "../../components/auth/SocialLogin";
 import { AuthContext } from "../../contextApi/AuthContext";
 
 export default function Login() {
   const { eplogin } = useContext(AuthContext);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -16,7 +17,6 @@ export default function Login() {
   };
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <Toaster position="top-center" reverseOrder={false} />
       <div className="card w-full max-w-md bg-white shadow-md p-6 rounded-md">
         <h2 className="text-2xl font-bold text-center mb-4">Login</h2>
         <form onSubmit={handleSubmit}>

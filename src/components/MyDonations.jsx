@@ -27,7 +27,7 @@ export default function MyDonations() {
   return (
     <div className="min-h-fit">
       <main className="container mx-auto md:px-4 pb-8 grid lg:grid-cols-3 grid-cols-1 gap-4">
-        {data?.donations
+        {data?.donations.length
           ? data.donations.map((campaign) => (
               <div className="card rounded-md bg-base-100 shadow-sm border">
                 <figure>

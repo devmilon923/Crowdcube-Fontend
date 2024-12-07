@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../contextApi/AuthContext";
+import { DataContext } from "../contextApi/DataContext";
 export default function AddNewCampaign() {
   const { user } = useContext(AuthContext);
-
+  const { homeData, setHomeData } = useContext(DataContext);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const photo = e.target.photo.files;
@@ -57,7 +58,10 @@ export default function AddNewCampaign() {
         method: "POST",
         body: JSON.stringify(campaignData),
       })
-        .then(() => {
+        .then((res) => res.json())
+        .then((data) => {
+          setHomeData([...homeData, data]);
+          console.log(data);
           toast.success("Campaign success to add");
           e.target.reset();
         })
@@ -69,35 +73,35 @@ export default function AddNewCampaign() {
     // console.log(campaignData);
   };
   return (
-    <div className=" flex items-center justify-center pb-14">
-      <div className="max-w-3xl w-full bg-white rounded-lg shadow-sm md:border p-2 md:p-8">
-        <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+    <div className=" flex items-center  justify-center pb-14">
+      <div className="max-w-3xl w-full bg-white dark:bg-slate-900 rounded-lg shadow-sm  border-none p-2 md:p-8">
+        <h1 className="text-2xl font-bold text-gray-800 dark:bg-slate-900 dark:border-slate-700 mb-6 text-center">
           Add New Campaign
         </h1>
 
         <form onSubmit={handleSubmit}>
           {/* Campaign Title */}
           <div className="mb-4">
-            <label className="block text-sm font-semibold text-gray-600 mb-1">
+            <label className="block text-sm font-semibold text-gray-600 mb-1 dark:text-slate-400">
               Campaign Title
             </label>
             <input
               type="text"
               name="campaign_title"
               required
-              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 dark:bg-slate-900 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Enter campaign title"
             />
           </div>
           {/* Campaign Category */}
           <div className="mb-4">
-            <label className="block text-sm font-semibold text-gray-600 mb-1">
+            <label className="block text-sm font-semibold text-gray-600 mb-1 dark:text-slate-400">
               Campaign Type
             </label>
             <select
               required
               name="campaign_type"
-              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-slate-400 dark:bg-slate-900 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-green-500"
             >
               <option defaultValue="" disabled selected>
                 Select a category
@@ -111,11 +115,11 @@ export default function AddNewCampaign() {
           </div>
           {/* Campaign Description */}
           <div className="mb-4">
-            <label className="block text-sm font-semibold text-gray-600 mb-1">
+            <label className="block text-sm font-semibold text-gray-600 mb-1 dark:text-slate-400">
               Campaign Description
             </label>
             <textarea
-              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 dark:bg-slate-900 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-green-500"
               rows="4"
               required
               name="description"
@@ -124,63 +128,63 @@ export default function AddNewCampaign() {
           </div>
           {/* Goal Amount */}
           <div className="mb-4">
-            <label className="block text-sm font-semibold text-gray-600 mb-1">
+            <label className="block text-sm font-semibold text-gray-600 mb-1 dark:text-slate-400">
               Goal Amount ($)
             </label>
             <input
               type="number"
               name="goal_amount"
               required
-              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 dark:bg-slate-900 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Enter goal amount"
             />
           </div>
           {/* Goal Amount */}
           <div className="mb-4">
-            <label className="block text-sm font-semibold text-gray-600 mb-1">
+            <label className="block text-sm font-semibold text-gray-600 mb-1 dark:text-slate-400">
               Min Amount ($)
             </label>
             <input
               type="number"
               name="min_donation_amount"
               required
-              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 dark:bg-slate-900 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Enter minimum donation amount"
             />
           </div>
           {/* Deadline */}
           <div className="mb-4">
-            <label className="block text-sm font-semibold text-gray-600 mb-1">
+            <label className="block text-sm font-semibold text-gray-600 mb-1 dark:text-slate-400">
               Deadline
             </label>
             <input
               type="date"
               name="deadline"
               required
-              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 dark:bg-slate-900 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-green-500"
             />
           </div>
           {/* Image Upload */}
           <div className="mb-6">
-            <label className="block text-sm font-semibold text-gray-600 mb-1">
+            <label className="block text-sm font-semibold text-gray-600 mb-1 dark:text-slate-400">
               Upload Campaign Image
             </label>
             <input
               type="file"
               name="photo"
               required
-              className="w-full text-gray-600 file-input file-input-sm rounded-none file-input-bordered"
+              className="w-full text-gray-800 dark:bg-slate-900 dark:border-slate-700 file-input file-input-sm rounded-none file-input-bordered"
               accept="image/*"
             />
           </div>
-          <div className="p-3 bg-green-50 border my-4">
+          <div className="p-3 bg-green-50 dark:bg-slate-900 dark:border-slate-700 dark:text-slate-400 border my-4">
             <p className="text-sm">Name: {user?.displayName}</p>
             <p className="text-sm">Email: {user?.email}</p>
           </div>
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-green-600 text-white font-semibold btn rounded-lg hover:bg-green-700 transition duration-300"
+            className="w-full dark:border-slate-700 bg-green-600 text-white font-semibold btn rounded-lg hover:bg-green-700 transition duration-300"
           >
             Submit Campaign
           </button>

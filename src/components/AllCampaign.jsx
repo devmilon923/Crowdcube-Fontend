@@ -15,17 +15,17 @@ export default function AllCampaign() {
       setAllCampaigns([]);
     }
   }, [result]);
-
+  console.log(allCampaigns);
   return (
-    <div className="min-h-fit shadow-sm border">
+    <div className="min-h-fit shadow-sm border dark:border-slate-800">
       <main className="container mx-auto px-4 py-8">
         <div className="flex justify-between gap-2 mb-4 items-center">
           <input
             type="text"
             placeholder="Search..."
-            className="input input-sm text-xs rounded-md input-bordered w-full max-w-xs"
+            className="input dark:text-white input-sm dark:bg-slate-800 text-xs rounded-sm input-bordered w-full max-w-xs"
           />
-          <button className="btn btn-sm px-8 bg-yellow-100 hover:bg-yellow-200 border ">
+          <button className="btn btn-sm px-8 bg-yellow-100 dark:bg-slate-900 dark:text-white hover:bg-yellow-200 border dark:border-slate-800">
             Sort By price
           </button>
         </div>
@@ -43,7 +43,10 @@ export default function AllCampaign() {
             <Table.Body className="divide-y">
               {allCampaigns
                 ? allCampaigns.map((campaign) => (
-                    <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                    <Table.Row
+                      key={campaign._id}
+                      className="bg-white dark:border-gray-700 dark:bg-gray-800"
+                    >
                       <Table.Cell className="flex items-center gap-4">
                         <img
                           src={campaign?.thumbnail}

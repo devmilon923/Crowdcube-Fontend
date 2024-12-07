@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contextApi/AuthContext";
 
 export default function SocialLogin() {
   const { googleLogin, facebookLogin, githubLogin } = useContext(AuthContext);
-
+  const location = useLocation();
+  const navigate = useNavigate();
   const handleGitHubLogin = () => {
     githubLogin()
       .then()
@@ -18,12 +20,11 @@ export default function SocialLogin() {
   };
   const handleGoogleLogin = () => {
     googleLogin()
-      .then(() => toast.success("Google login"))
+      .then()
       .catch((err) => toast.error(err.message));
   };
   return (
     <div>
-      <Toaster position="top-center" reverseOrder={false} />
       <button
         onClick={handleGitHubLogin}
         className="btn hover:bg-gray-200 border hover:text-gray-800 w-full flex items-center justify-center mb-2"

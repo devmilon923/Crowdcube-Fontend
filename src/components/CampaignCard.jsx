@@ -48,7 +48,7 @@ const CampaignCard = ({ campaign }) => {
     document.getElementById("my_modal_2").showModal();
   };
   return (
-    <div className=" from-white via-green-100 to-white bg-gradient-to-r border rounded-lg shadow-sm overflow-hidden hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+    <div className=" from-white dark:border-slate-950 dark:from-slate-900 via-emerald-100 dark:via-slate-900 to-white dark:to-slate-900 bg-gradient-to-r border rounded-lg shadow-sm overflow-hidden hover:shadow-md hover:-translate-y-1 transition-all duration-300">
       <dialog id="my_modal_1" className="modal">
         <div className="modal-box">
           <h3 className="font-bold text-lg">Hello!</h3>
@@ -112,31 +112,31 @@ const CampaignCard = ({ campaign }) => {
       {/* Content */}
       <div className="p-4">
         {/* Title */}
-        <h3 className="text-lg font-semibold text-gray-800 mb-2">
+        <h3 className="text-lg font-semibold text-gray-800 mb-2 dark:text-white">
           {campaign.campaign_title}
         </h3>
         {/* Deadline */}
-        <p className="text-sm text-gray-600 mb-4">
+        <p className="text-sm text-gray-600 mb-4 dark:text-slate-400">
           Deadline:{" "}
-          <span className="font-medium text-gray-800">
+          <span className="font-medium text-gray-800 dark:text-slate-400">
             {campaign?.deadline
               ? new Date(campaign.deadline).toISOString().split("T")[0]
               : "N/A"}
           </span>
         </p>
         {/* Progress Bar */}
-        <div className="bg-gray-200 h-2 rounded-full mb-2">
+        <div className="dark:bg-gray-500 bg-gray-200 h-2 rounded-full mb-2">
           <div
-            className="bg-green-500 h-full rounded-full"
+            className="bg-green-500  h-full rounded-full"
             style={{ width: `${percentage}%` }}
           ></div>
         </div>
-        <p className="text-sm text-gray-600 mb-2">
+        <p className="text-sm text-gray-600 mb-2 dark:text-slate-400">
           Raised: <span className="font-medium">${balance}</span> of{" "}
           <span className="font-medium">${need}</span>
         </p>
 
-        <p className="text-sm text-gray-600 mb-2 ">
+        <p className="text-sm text-gray-600 mb-2 dark:text-slate-400">
           Status:{" "}
           <span
             onClick={showUserInfo}
@@ -149,34 +149,37 @@ const CampaignCard = ({ campaign }) => {
             )}
           </span>
         </p>
+        <p className="text-sm text-gray-600 mb-2 dark:text-slate-400">
+          {user?.uid === campaign.user_uid && "Your Campaign"}
+        </p>
         {/* Button */}
         {user?.uid === campaign.user_uid ? (
           <div className="grid grid-cols-3 gap-3">
             <NavLink
-              className="className=w-full btn btn-sm text-xs bg-white border shadow-sm  text-green-600 font-semibold rounded-md hover:bg-green-300 transition duration-300"
+              className="className=w-full btn btn-sm text-xs bg-white dark:bg-slate-800 dark:border-slate-900 border shadow-sm  text-green-600 font-semibold rounded-md hover:bg-green-300 transition duration-300"
               to={`/campaign/details/${campaign._id}`}
             >
-              <i class="fa-regular fa-eye"></i>
+              <i className="fa-regular fa-eye"></i>
             </NavLink>
 
             <NavLink
               to={`/campaign/update/${campaign._id}`}
-              className="w-full btn btn-sm text-xs bg-white border shadow-sm text-emerald-600 font-semibold rounded-md hover:bg-green-300 transition duration-300"
+              className="w-full dark:bg-slate-800 dark:border-slate-900 btn btn-sm text-xs bg-white border shadow-sm text-emerald-600 font-semibold rounded-md hover:bg-green-300 transition duration-300"
             >
-              <i class="fa-regular fa-pen-to-square"></i>
+              <i className="fa-regular fa-pen-to-square"></i>
             </NavLink>
             <button
               onClick={handleDelete}
-              className="w-full btn btn-sm text-xs bg-white border shadow-sm  text-red-600 text-semibold rounded-md hover:bg-green-300 transition duration-300"
+              className="w-full dark:bg-slate-800 dark:border-slate-900 btn btn-sm text-xs bg-white border shadow-sm  text-red-600 text-semibold rounded-md hover:bg-green-300 transition duration-300"
             >
-              <i class="fa-solid fa-trash-arrow-up"></i>
+              <i className="fa-solid fa-trash-arrow-up"></i>
             </button>
           </div>
         ) : (
           <div className="">
             <NavLink
               to={`/campaign/details/${campaign._id}`}
-              className="w-full btn bg-green-500 btn-sm text-white font-semibold rounded-md text-xs hover:bg-green-600 transition duration-300"
+              className="w-full btn bg-green-500 dark:bg-green-600 dark:border-slate-700 btn-sm text-white font-semibold rounded-md text-xs hover:bg-green-600 transition duration-300"
             >
               See More
             </NavLink>
