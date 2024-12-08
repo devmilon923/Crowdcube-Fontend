@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
 export default function NotFound404() {
+  useEffect(() => {
+    document.title = "404 Error | Crowdcube";
+  }, []);
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="text-center">

@@ -12,7 +12,9 @@ export default function Home() {
   const { homeData, setHomeData } = useContext(DataContext);
   const location = useLocation();
   const { user } = useContext(AuthContext);
-
+  useEffect(() => {
+    document.title = "Home | Crowdcube";
+  }, []);
   useEffect(() => {
     fetch(`${import.meta.env.VITE_apiUrl}/campaign/home`)
       .then((res) => res.json())

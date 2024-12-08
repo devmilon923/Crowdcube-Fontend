@@ -1,11 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "swiper/css";
+import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 export default function Banner() {
   return (
     <div>
-      <div className="w-full from-white dark:from-slate-900 via-emerald-100 dark:via-slate-800 to-white dark:to-slate-900 bg-gradient-to-r rounded-md border-l dark:border-l-slate-950 border-r dark:border-r-slate-950 md:px-6 lg:px-12 pt-12 md:pb-12">
+      <div className="w-full from-white dark:from-slate-900 via-emerald-100 dark:via-slate-800 to-white dark:to-slate-900 bg-gradient-to-r rounded-md border-l dark:border-l-slate-950 border-r dark:border-r-slate-950 md:px-6  pt-12 md:pb-12">
         <div className="grid md:grid-cols-2 grid-cols-1 gap-6 md:gap-12 items-center">
           <div className="space-y-3 text-center md:text-start lg:px-12 px-2">
             <h1
@@ -41,7 +42,22 @@ export default function Banner() {
             </div>
           </div>
           <div>
-            <Swiper className="mySwiper z-0">
+            <Swiper
+              modules={[Autoplay]}
+              autoplay={{
+                delay: 3000,
+                disableOnInteraction: false,
+              }}
+              className="mySwiper z-0"
+            >
+              <SwiperSlide>
+                {" "}
+                <img
+                  className="object-cover h-80 w-full rounded-md"
+                  src="https://images.inc.com/uploaded_files/image/1920x1080/getty_489308794_334853.jpg"
+                  alt=""
+                />
+              </SwiperSlide>
               <SwiperSlide>
                 <img
                   className="object-cover h-80 w-full rounded-md"
@@ -50,10 +66,9 @@ export default function Banner() {
                 />
               </SwiperSlide>
               <SwiperSlide>
-                {" "}
                 <img
                   className="object-cover h-80 w-full rounded-md"
-                  src="https://next-images.123rf.com/index/_next/image/?url=https://assets-cdn.123rf.com/index/static/assets/top-section-bg.jpeg&w=3840&q=75"
+                  src="https://images.inc.com/uploaded_files/image/1920x1080/getty_537417802_242851.jpg"
                   alt=""
                 />
               </SwiperSlide>

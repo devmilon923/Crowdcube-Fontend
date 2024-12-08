@@ -7,7 +7,9 @@ export default function MyDonations() {
   const { user } = useContext(AuthContext);
   const location = useLocation();
   const [data, setData] = useState();
-
+  useEffect(() => {
+    document.title = "My Donations | Crowdcube";
+  }, []);
   useEffect(() => {
     if (user?.uid) {
       fetch(`${import.meta.env.VITE_apiUrl}/campaign/donate/me`, {

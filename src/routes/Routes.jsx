@@ -1,13 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
-import AddNewCampaign from "../components/AddNewCampaign";
-import AllCampaign from "../components/AllCampaign";
-import CampaignDetails from "../components/CampaignDetails";
-import MyCampaign from "../components/MyCampaign";
-import MyDonations from "../components/MyDonations";
-import UpdateCampaign from "../components/UpdateCampaign";
+
 import Main from "../layouts/Main";
+import AddNewCampaign from "../pages/AddNewCampaign";
+import AllCampaign from "../pages/AllCampaign";
+import CampaignDetails from "../pages/CampaignDetails";
 import Home from "../pages/Home";
+import MyCampaign from "../pages/MyCampaign";
+import MyDonations from "../pages/MyDonations";
 import NotFound404 from "../pages/NotFound404";
+import UpdateCampaign from "../pages/UpdateCampaign";
 import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
 import PrivateRoute from "./PrivateRoute";

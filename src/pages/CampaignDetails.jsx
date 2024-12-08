@@ -9,6 +9,9 @@ const CampaignDetails = () => {
   const [deadline, setDeadline] = useState(null);
   const result = useLoaderData();
   useEffect(() => {
+    document.title = "Campaign Details | Crowdcube";
+  }, []);
+  useEffect(() => {
     if (result.data) {
       setDetails(result.data);
     } else {

@@ -1,5 +1,5 @@
 import { Spinner } from "flowbite-react";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../contextApi/AuthContext";
 import { DataContext } from "../contextApi/DataContext";
@@ -7,6 +7,9 @@ export default function AddNewCampaign() {
   const [btnLoader, setloader] = useState(false);
   const { user } = useContext(AuthContext);
   const { homeData, setHomeData } = useContext(DataContext);
+  useEffect(() => {
+    document.title = "Add Campaign | Crowdcube";
+  }, []);
   const handleSubmit = async (e) => {
     setloader(true);
     e.preventDefault();

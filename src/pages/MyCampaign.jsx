@@ -1,9 +1,9 @@
 import { Table } from "flowbite-react";
 import React, { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import Tr from "../components/Tr";
 import { AuthContext } from "../contextApi/AuthContext";
 import { DataContext } from "../contextApi/DataContext";
-import Tr from "./Tr";
 
 export default function MyCampaign() {
   const { user } = useContext(AuthContext);
@@ -11,7 +11,9 @@ export default function MyCampaign() {
   const [filteredCampaigns, setFilteredCampaigns] = useState([]);
   const location = useLocation();
   const { setMyCampaigns, myCampaigns } = useContext(DataContext);
-
+  useEffect(() => {
+    document.title = "My Campaigns | Crowdcube";
+  }, []);
   if (user?.uid) {
     useEffect(() => {
       fetch(`${import.meta.env.VITE_apiUrl}/campaign/me`, {

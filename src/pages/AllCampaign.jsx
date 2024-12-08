@@ -10,7 +10,9 @@ export default function AllCampaign() {
   const [filteredCampaigns, setFilteredCampaigns] = useState([]);
 
   const result = useLoaderData();
-
+  useEffect(() => {
+    document.title = "View All Campaigns | Crowdcube";
+  }, []);
   useEffect(() => {
     if (result.data.length > 0) {
       setAllCampaigns(result.data);

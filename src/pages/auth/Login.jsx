@@ -1,5 +1,5 @@
 import { Spinner } from "flowbite-react";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { NavLink } from "react-router-dom";
 import SocialLogin from "../../components/auth/SocialLogin";
@@ -8,7 +8,9 @@ import { AuthContext } from "../../contextApi/AuthContext";
 export default function Login() {
   const [btnLoader, setloader] = useState(false);
   const { eplogin } = useContext(AuthContext);
-
+  useEffect(() => {
+    document.title = "Login | Crowdcube";
+  }, []);
   const handleSubmit = (e) => {
     setloader(true);
     e.preventDefault();
@@ -25,8 +27,8 @@ export default function Login() {
       });
   };
   return (
-    <div className="flex items-center justify-center  bg-gray-100 dark:bg-slate-900">
-      <div className="card w-full max-w-md bg-white dark:bg-slate-900 border dark:border-slate-950 shadow-md p-6 rounded-md">
+    <div className="flex items-center justify-center  dark:bg-slate-900">
+      <div className="card w-full max-w-md bg-white dark:bg-slate-900 border dark:border-slate-950 shadow-sm p-6 rounded-md">
         <h2 className="text-2xl font-bold text-center mb-4 dark:text-white">
           Login
         </h2>

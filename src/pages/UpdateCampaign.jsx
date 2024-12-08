@@ -10,6 +10,9 @@ export default function UpdateCampaign() {
   const [currentData, setCurrentData] = useState(null);
   const result = useLoaderData();
   useEffect(() => {
+    document.title = "Update Campaign | Crowdcube";
+  }, []);
+  useEffect(() => {
     if (result.data) {
       setCurrentData(result.data);
     } else {
