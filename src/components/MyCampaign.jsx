@@ -79,7 +79,7 @@ export default function MyCampaign() {
               <Table.HeadCell>Action</Table.HeadCell>
             </Table.Head>
             <Table.Body className="divide-y">
-              {filteredCampaigns.length > 0 ? (
+              {filteredCampaigns ? (
                 filteredCampaigns.map((campaign) => (
                   <Tr campaign={campaign} key={campaign._id} />
                 ))

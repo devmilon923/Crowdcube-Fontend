@@ -9,8 +9,14 @@ const CampaignCard = ({ campaign }) => {
   const balance = campaign?.current_balance;
   const percentage = (balance / need) * 100;
   const [deadline, setDeadline] = useState(null);
-  const { setMyCampaigns, myCampaigns, setAllCampaigns, allCampaigns } =
-    useContext(DataContext);
+  const {
+    setMyCampaigns,
+    myCampaigns,
+    setAllCampaigns,
+    allCampaigns,
+    homeData,
+    setHomeData,
+  } = useContext(DataContext);
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
@@ -34,8 +40,10 @@ const CampaignCard = ({ campaign }) => {
         document.getElementById("close").click();
         const updatedData = myCampaigns.filter((up) => up._id !== id);
         const allupdatedData = allCampaigns.filter((all) => all._id !== id);
+        const homeUpdatedData = homeData.filter((all) => all._id !== id);
         setMyCampaigns(updatedData);
         setAllCampaigns(allupdatedData);
+        setHomeData(homeUpdatedData);
 
         return toast.success("This data success to delete");
       })
