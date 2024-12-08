@@ -85,10 +85,8 @@ export default function AddNewCampaign() {
         .catch((err) => {
           setloader(false);
           toast.error("Campaign failed to add");
-        
         });
     }
-  
   };
   return (
     <div className=" flex items-center  justify-center">
@@ -125,10 +123,10 @@ export default function AddNewCampaign() {
                 Select a category
               </option>
               <option>Health</option>
-              <option>Education</option>
-              <option>Environment</option>
-              <option>Disaster Relief</option>
-              <option>Other</option>
+              <option>Startup</option>
+              <option>Personal issue</option>
+              <option>Business</option>
+              <option>Creative ideas</option>
             </select>
           </div>
           {/* Campaign Description */}
