@@ -41,9 +41,10 @@ export default function Tr({ campaign }) {
     <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
       <dialog id="my_modal_1" className="modal ">
         <div className="modal-box bg-white dark:border-gray-700 dark:bg-gray-800">
-          <h3 className="font-bold text-lg">Hello!</h3>
+          <h3 className="font-bold text-lg">Action required!</h3>
           <p className="py-4">
-            Press Delete key or click the button below to close
+            After clicking the delete button, please note that you can't undo
+            this action.
           </p>
           <div className="modal-action">
             <form method="dialog" className="space-x-2 flex gap-2">
