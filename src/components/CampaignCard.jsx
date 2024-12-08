@@ -78,7 +78,11 @@ const CampaignCard = ({ campaign }) => {
           </span>
         </p>
         <p className="text-sm text-gray-600 mb-2 dark:text-slate-400">
-          {user?.uid === campaign.user_uid && user?.uid}
+          {user?.uid === campaign.user_uid ? (
+            "Your Campaign"
+          ) : (
+            <span>User: {campaign.user_name}</span>
+          )}
         </p>
         {/* Button */}
         {user?.uid === campaign.user_uid ? (
