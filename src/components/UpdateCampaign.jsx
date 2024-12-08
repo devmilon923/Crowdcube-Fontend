@@ -1,8 +1,11 @@
+import { Spinner } from "flowbite-react";
 import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../contextApi/AuthContext";
 export default function UpdateCampaign() {
+  const [btnLoader, setloader] = useState(false);
+
   const { user } = useContext(AuthContext);
   const [currentData, setCurrentData] = useState(null);
   const result = useLoaderData();
@@ -15,25 +18,33 @@ export default function UpdateCampaign() {
   }, [result, setCurrentData]);
 
   const handleSubmit = async (e) => {
+    setloader(true);
     e.preventDefault();
     if (
       e.target.campaign_title.value.trim() === "" ||
       e.target.description.value.trim() === "" ||
       e.target.campaign_type.value.trim() === ""
     ) {
+      setloader(false);
       return toast.error("Empty space are not allowed");
     }
-    if (parseInt(e.target.goal_amount.value) <= 0)
+    if (parseInt(e.target.goal_amount.value) <= 0) {
+      setloader(false);
       return toast.error("Invalid goal amount");
+    }
 
     if (
       parseInt(e.target.goal_amount.value) <
       parseInt(e.target.min_donation_amount.value)
-    )
+    ) {
+      setloader(false);
       return toast.error("Minimum donation amount to high");
+    }
     const photo = e.target.photo.files;
-    if (currentData?.user_uid !== user?.uid)
+    if (currentData?.user_uid !== user?.uid) {
+      setloader(false);
       return toast.error("Access denied! Only the owner can update.");
+    }
     if (photo.length === 0) {
       const campaignData = {
         title: e.target.campaign_title.value,
@@ -57,10 +68,12 @@ export default function UpdateCampaign() {
         body: JSON.stringify(campaignData),
       })
         .then(() => {
-          return toast.success("Campaign success to add");
+          setloader(false);
+          return toast.success("Campaign successfully updated");
         })
         .catch((err) => {
-          toast.error("Campaign failed to add");
+          setloader(false);
+          toast.error("Campaign failed to update");
           return console.log(err);
         });
     } else {
@@ -100,28 +113,32 @@ export default function UpdateCampaign() {
           body: JSON.stringify(campaignData),
         })
           .then(() => {
-            return toast.success("Campaign success to update");
+            setloader(false);
+            return toast.success("Campaign successfully updated");
           })
           .catch((err) => {
+            setloader(false);
             toast.error("Campaign failed to update");
             return console.log(err);
           });
       } else {
+        setloader(false);
+
         return toast.error("Try again");
       }
     }
   };
   return (
-    <div className=" flex items-center justify-center pb-14">
-      <div className="max-w-3xl w-full bg-white rounded-lg shadow-sm md:border p-2 md:p-8">
-        <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+    <div className=" flex items-center justify-center">
+      <div className="max-w-3xl w-full dark:bg-slate-900 bg-white rounded-lg shadow-sm md:border  border-none p-2 md:px-8 pt-0 pb-8 ">
+        <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center dark:text-white">
           Update Campaign
         </h1>
 
         <form onSubmit={handleSubmit}>
           {/* Campaign Title */}
           <div className="mb-4">
-            <label className="block text-sm font-semibold text-gray-600 mb-1">
+            <label className="block text-sm font-semibold text-gray-600 mb-1 dark:text-slate-400">
               Campaign Title
             </label>
             <input
@@ -129,19 +146,19 @@ export default function UpdateCampaign() {
               name="campaign_title"
               required
               defaultValue={currentData?.campaign_title}
-              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 dark:text-slate-400 dark:bg-slate-900 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Enter campaign title"
             />
           </div>
           {/* Campaign Category */}
           <div className="mb-4">
-            <label className="block text-sm font-semibold text-gray-600 mb-1">
+            <label className="block text-sm font-semibold text-gray-600 mb-1 dark:text-slate-400">
               Campaign Type
             </label>
             <select
               required
               name="campaign_type"
-              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 dark:text-slate-400 dark:bg-slate-900 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-green-500"
             >
               <option defaultValue="" disabled selected>
                 Select a category
@@ -167,11 +184,11 @@ export default function UpdateCampaign() {
           </div>
           {/* Campaign Description */}
           <div className="mb-4">
-            <label className="block text-sm font-semibold text-gray-600 mb-1">
+            <label className="block text-sm font-semibold text-gray-600 mb-1 dark:text-slate-400">
               Campaign Description
             </label>
             <textarea
-              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 dark:text-slate-400 dark:bg-slate-900 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-green-500"
               rows="4"
               required
               defaultValue={currentData?.description}
@@ -181,7 +198,7 @@ export default function UpdateCampaign() {
           </div>
           {/* Goal Amount */}
           <div className="mb-4">
-            <label className="block text-sm font-semibold text-gray-600 mb-1">
+            <label className="block text-sm font-semibold text-gray-600 mb-1 dark:text-slate-400">
               Goal Amount ($)
             </label>
             <input
@@ -189,13 +206,13 @@ export default function UpdateCampaign() {
               name="goal_amount"
               defaultValue={currentData?.goal_amount}
               required
-              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 dark:text-slate-400 dark:bg-slate-900 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Enter goal amount"
             />
           </div>
           {/* Goal Amount */}
           <div className="mb-4">
-            <label className="block text-sm font-semibold text-gray-600 mb-1">
+            <label className="block text-sm font-semibold text-gray-600 mb-1 dark:text-slate-400">
               Min Amount ($)
             </label>
             <input
@@ -203,13 +220,13 @@ export default function UpdateCampaign() {
               defaultValue={currentData?.min_donation_amount}
               name="min_donation_amount"
               required
-              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 dark:text-slate-400 dark:bg-slate-900 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Enter minimum donation amount"
             />
           </div>
           {/* Deadline */}
           <div className="mb-4">
-            <label className="block text-sm font-semibold text-gray-600 mb-1">
+            <label className="block text-sm font-semibold text-gray-600 mb-1 dark:text-slate-400">
               Deadline
             </label>
             <input
@@ -221,31 +238,38 @@ export default function UpdateCampaign() {
                   : ""
               }
               required
-              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 dark:text-slate-400 dark:bg-slate-900 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-green-500"
             />
           </div>
           {/* Image Upload */}
           <div className="mb-6">
-            <label className="block text-sm font-semibold text-gray-600 mb-1">
-              Upload Campaign Image
+            <label className="block text-sm font-semibold text-gray-600 mb-1 dark:text-slate-400">
+              Upload New Campaign Image
             </label>
             <input
               type="file"
               name="photo"
-              className="w-full text-gray-600 file-input file-input-sm rounded-none file-input-bordered"
+              className="w-full dark:text-slate-400 text-gray-800 dark:bg-slate-900 dark:border-slate-700 file-input file-input-sm rounded-none file-input-bordered"
               accept="image/*"
             />
           </div>
-          <div className="p-3 bg-green-50 border my-4">
+          <div className="p-3 bg-green-50 dark:bg-slate-900 dark:border-slate-700 dark:text-slate-400 border my-4">
             <p className="text-sm">Name: {user?.displayName}</p>
             <p className="text-sm">Email: {user?.email}</p>
           </div>
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-green-600 text-white font-semibold btn rounded-lg hover:bg-green-700 transition duration-300"
+            className="w-full dark:border-slate-700 bg-green-600 text-white font-semibold btn rounded-lg hover:bg-green-700 transition duration-300"
           >
-            Submit Campaign
+            {btnLoader ? (
+              <div className="flex items-center">
+                <Spinner aria-label="Spinner button example" size="sm" />
+                <span className="pl-3">Loading...</span>
+              </div>
+            ) : (
+              "Update Now"
+            )}
           </button>
         </form>
       </div>

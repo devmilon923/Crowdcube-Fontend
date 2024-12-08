@@ -121,7 +121,7 @@ const CampaignDetails = () => {
             ></div>
           </div>
           {/* Donation Form */}
-          <div className="bg-gray-50 dark:bg-slate-900 p-4 rounded-lg shadow-inner">
+          <div className="bg-gray-50 dark:bg-slate-900 p-4 border dark:border-slate-800 rounded-lg shadow-inner">
             <h2 className="text-lg font-semibold text-gray-800 mb-4 dark:text-white">
               Donate Now
             </h2>
