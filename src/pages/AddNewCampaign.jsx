@@ -1,12 +1,18 @@
 import { Spinner } from "flowbite-react";
 import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useLocation } from "react-router-dom";
 import { AuthContext } from "../contextApi/AuthContext";
 import { DataContext } from "../contextApi/DataContext";
 export default function AddNewCampaign() {
   const [btnLoader, setloader] = useState(false);
   const { user } = useContext(AuthContext);
   const { homeData, setHomeData } = useContext(DataContext);
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top of the page
+  }, [location.pathname]);
   useEffect(() => {
     document.title = "Add Campaign | Crowdcube";
   }, []);
@@ -73,7 +79,6 @@ export default function AddNewCampaign() {
         .then((data) => {
           setHomeData([...homeData, data]);
           setloader(false);
-
           toast.success("Campaign successfully added");
           e.target.reset();
         })

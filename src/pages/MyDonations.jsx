@@ -7,6 +7,10 @@ export default function MyDonations() {
   const { user } = useContext(AuthContext);
   const location = useLocation();
   const [data, setData] = useState();
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top of the page
+  }, [location.pathname]);
   useEffect(() => {
     document.title = "My Donations | Crowdcube";
   }, []);
@@ -26,13 +30,17 @@ export default function MyDonations() {
         .catch((err) => console.log(err));
     }
   }, [user?.uid, location.pathname]); // Dependency array
-  console.log(data);
+
   return (
     <div className="min-h-fit">
       <main className="container mx-auto md:px-4 pb-8 grid lg:grid-cols-3 grid-cols-1 gap-4">
         {data?.donations.length ? (
           data.donations.map((campaign) => (
-            <div className="card rounded-md dark:border-slate-950 bg-base-100 dark:bg-slate-900 shadow-sm border">
+            <div
+              data-aos="fade-up"
+              data-aos-anchor-placement="center-bottom"
+              className="card rounded-md dark:border-slate-950 bg-base-100 dark:bg-slate-900 shadow-sm border"
+            >
               <figure>
                 <img
                   className="h-32 object-cover bg-gray-50 w-full"

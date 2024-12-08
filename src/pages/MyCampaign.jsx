@@ -11,6 +11,10 @@ export default function MyCampaign() {
   const [filteredCampaigns, setFilteredCampaigns] = useState([]);
   const location = useLocation();
   const { setMyCampaigns, myCampaigns } = useContext(DataContext);
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top of the page
+  }, [location.pathname]);
   useEffect(() => {
     document.title = "My Campaigns | Crowdcube";
   }, []);

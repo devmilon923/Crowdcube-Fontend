@@ -1,13 +1,20 @@
+import { Spinner } from "flowbite-react";
 import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useLocation } from "react-router-dom";
 import { AuthContext } from "../contextApi/AuthContext";
 
 const CampaignDetails = () => {
+  const [btnLoader, setloader] = useState(false);
   const { user } = useContext(AuthContext);
   const [details, setDetails] = useState(null);
   const [deadline, setDeadline] = useState(null);
   const result = useLoaderData();
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top of the page
+  }, [location.pathname]);
   useEffect(() => {
     document.title = "Campaign Details | Crowdcube";
   }, []);
@@ -23,8 +30,7 @@ const CampaignDetails = () => {
   const percentage = (balance / need) * 100;
 
   useEffect(() => {
-    const currentTime = new Date().toISOString();
-    if (currentTime < details?.deadline) {
+    if (new Date().toISOString() < details?.deadline) {
       return setDeadline(true);
     } else {
       return setDeadline(false);
@@ -33,13 +39,30 @@ const CampaignDetails = () => {
 
   const handleDonate = async (e) => {
     e.preventDefault();
+    setloader(true);
     const amount = e.target.amount.value;
-    if (!deadline) return toast.error("Deadline is over for this campaign");
-    if (details?.user_uid === user?.uid)
-      return toast.error("You can't donate your own campaign");
 
-    if (need - balance < amount) return toast.error(`Your amount is to high!`);
-    if (amount > need) return toast.error("Your donation amount too high");
+    if (!deadline) {
+      setloader(false);
+      return toast.error("Deadline is over for this campaign");
+    }
+    if (details?.user_uid === user?.uid) {
+      setloader(false);
+      return toast.error("You can't donate your own campaign");
+    }
+    if (parseInt(details?.min_donation_amount) > parseInt(amount)) {
+      setloader(false);
+      return toast.error(`Your amount is to low!`);
+    }
+
+    if (need - balance < amount) {
+      setloader(false);
+      return toast.error(`Your amount is to high!`);
+    }
+    if (amount > need) {
+      setloader(false);
+      return toast.error("Your donation amount too high");
+    }
     await fetch(`${import.meta.env.VITE_apiUrl}/campaign/donate`, {
       headers: {
         "Content-type": "application/json",
@@ -58,13 +81,13 @@ const CampaignDetails = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        setloader(false);
         setDetails(data);
         e.target.reset();
         toast.success("Thanks for your donation!");
       })
       .catch((err) => {
-        console.log(err);
+        setloader(false);
         toast.error("Sorry there is an error");
       });
   };
@@ -134,7 +157,6 @@ const CampaignDetails = () => {
                   Minimum Donation Amount (${details?.min_donation_amount})
                 </label>
                 <input
-                  defaultValue={details?.min_donation_amount}
                   type="number"
                   name="amount"
                   required
@@ -155,9 +177,19 @@ const CampaignDetails = () => {
                   ) : (
                     <button
                       type="submit"
-                      className="w-full btn bg-green-500 dark:bg-green-600 dark:border-slate-700 text-white font-semibold rounded-lg hover:bg-green-600 transition duration-300"
+                      className="w-full dark:border-slate-700 bg-green-600 text-white font-semibold btn rounded-lg hover:bg-green-700 transition duration-300"
                     >
-                      Donate Now
+                      {btnLoader ? (
+                        <div className="flex items-center">
+                          <Spinner
+                            aria-label="Spinner button example"
+                            size="sm"
+                          />
+                          <span className="pl-3">Loading...</span>
+                        </div>
+                      ) : (
+                        "Donate"
+                      )}
                     </button>
                   )}
                 </div>

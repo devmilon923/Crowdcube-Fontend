@@ -1,7 +1,7 @@
 import { Table } from "flowbite-react";
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../contextApi/AuthContext";
 
 export default function Tr({ campaign }) {
@@ -67,7 +67,12 @@ export default function Tr({ campaign }) {
           className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
         >
           {" "}
-          {campaign?.campaign_title}
+          {campaign?.campaign_title}{" "}
+          {new Date().toISOString() < campaign?.deadline ? (
+            <div className="badge badge-success text-xs text-white">Active</div>
+          ) : (
+            <div className="badge badge-warning text-xs">Expire</div>
+          )}
         </NavLink>
       </Table.Cell>
       <Table.Cell>{campaign?.campaign_type}</Table.Cell>
@@ -75,18 +80,18 @@ export default function Tr({ campaign }) {
       <Table.Cell>${campaign?.current_balance}</Table.Cell>
       <Table.Cell>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-1">
-          <NavLink
+          <Link
             to={`/campaign/update/${campaign?._id}`}
             className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
           >
             Update
-          </NavLink>
-          <NavLink
+          </Link>
+          <Link
             onClick={handleDelete}
             className="font-medium text-red-600 hover:underline dark:text-red-400"
           >
             Delete
-          </NavLink>
+          </Link>
         </div>
       </Table.Cell>
     </Table.Row>

@@ -1,6 +1,6 @@
 import { Table } from "flowbite-react";
 import React, { useContext, useEffect, useState } from "react";
-import { NavLink, useLoaderData } from "react-router-dom";
+import { NavLink, useLoaderData, useLocation } from "react-router-dom";
 import { DataContext } from "../contextApi/DataContext";
 
 export default function AllCampaign() {
@@ -10,6 +10,11 @@ export default function AllCampaign() {
   const [filteredCampaigns, setFilteredCampaigns] = useState([]);
 
   const result = useLoaderData();
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top of the page
+  }, [location.pathname]);
   useEffect(() => {
     document.title = "View All Campaigns | Crowdcube";
   }, []);
@@ -86,7 +91,18 @@ export default function AllCampaign() {
                         alt=""
                       />
                     </Table.Cell>
-                    <Table.Cell>{campaign?.campaign_title}</Table.Cell>
+                    <Table.Cell>
+                      {campaign?.campaign_title}{" "}
+                      {new Date().toISOString() < campaign?.deadline ? (
+                        <div className="badge badge-success text-xs text-white">
+                          Active
+                        </div>
+                      ) : (
+                        <div className="badge badge-warning text-xs">
+                          Expire
+                        </div>
+                      )}
+                    </Table.Cell>
                     <Table.Cell>{campaign?.campaign_type}</Table.Cell>
                     <Table.Cell>${campaign?.goal_amount}</Table.Cell>
                     <Table.Cell>${campaign?.current_balance}</Table.Cell>

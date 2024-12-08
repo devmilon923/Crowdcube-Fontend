@@ -4,12 +4,21 @@ export default function FundraisingStep() {
   return (
     <div>
       <div className="mb-5">
-        <h1 className="text-3xl font-bold text-center dark:text-white">
+        <h1
+          data-aos="flip-up"
+          data-aos-anchor-placement="center-bottom"
+          className="lg:text-3xl text-2xl font-bold text-center dark:text-white"
+        >
           Start Your Journey
         </h1>
       </div>
       <div className="grid lg:grid-cols-3 grid-cols-1 gap-5">
-        <div className="card bg-base-100 dark:bg-slate-900 dark:border-slate-950 rounded-md shadow-sm border">
+        <div
+          data-aos="flip-up"
+          data-aos-delay="100"
+          data-aos-anchor-placement="center-bottom"
+          className="card bg-base-100 dark:bg-slate-900 dark:border-slate-950 rounded-md shadow-sm border"
+        >
           <figure className="relative">
             <div className="w-12 h-12 rounded-full flex items-center justify-center absolute right-4 bg-green-100 dark:bg-green-700 dark:text-white dark:border-slate-950 bottom-4 font-extrabold text-slate-800">
               1
@@ -30,7 +39,12 @@ export default function FundraisingStep() {
           </div>
         </div>
 
-        <div className="card bg-base-100 dark:bg-slate-900 dark:border-slate-950 rounded-md shadow-sm border">
+        <div
+          data-aos="flip-up"
+          data-aos-delay="200"
+          data-aos-anchor-placement="center-bottom"
+          className="card bg-base-100 dark:bg-slate-900 dark:border-slate-950 rounded-md shadow-sm border"
+        >
           <figure className="relative">
             <div className="w-12 h-12 rounded-full flex items-center justify-center absolute right-4 bg-green-100 dark:bg-green-700 dark:text-white dark:border-slate-950 bottom-4 font-extrabold text-slate-800">
               2
@@ -49,7 +63,12 @@ export default function FundraisingStep() {
           </div>
         </div>
 
-        <div className="card bg-base-100 dark:bg-slate-900 dark:border-slate-950 rounded-md shadow-sm border">
+        <div
+          data-aos="flip-up"
+          data-aos-delay="500"
+          data-aos-anchor-placement="center-bottom"
+          className="card bg-base-100 dark:bg-slate-900 dark:border-slate-950 rounded-md shadow-sm border"
+        >
           <figure className="relative">
             <div className="w-12 h-12 rounded-full flex items-center justify-center absolute right-4 bg-green-100 dark:bg-green-700 dark:text-white dark:border-slate-950 bottom-4 font-extrabold text-slate-800">
               3

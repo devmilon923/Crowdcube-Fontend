@@ -1,7 +1,7 @@
 import { Spinner } from "flowbite-react";
 import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useLocation } from "react-router-dom";
 import { AuthContext } from "../contextApi/AuthContext";
 export default function UpdateCampaign() {
   const [btnLoader, setloader] = useState(false);
@@ -9,6 +9,10 @@ export default function UpdateCampaign() {
   const { user } = useContext(AuthContext);
   const [currentData, setCurrentData] = useState(null);
   const result = useLoaderData();
+  const location = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top of the page
+  }, [location.pathname]);
   useEffect(() => {
     document.title = "Update Campaign | Crowdcube";
   }, []);

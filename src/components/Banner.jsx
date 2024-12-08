@@ -1,5 +1,7 @@
 import React from "react";
+import { Fade } from "react-awesome-reveal";
 import { NavLink } from "react-router-dom";
+import { Typewriter } from "react-simple-typewriter";
 import "swiper/css";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -14,30 +16,37 @@ export default function Banner() {
               data-aos-delay="100"
               className="text-2xl md:text-4xl font-extrabold dark:text-white text-slate-600"
             >
-              Do something incredible today
+              Welcome to Crowdcube — Where{" "}
+              <Typewriter
+                loop={false}
+                words={["Ideas Grow", "Dreams Rise", "Impact Grows"]}
+              />
+              {/* <Typewriter words={["Do something incredible today"]} /> */}
             </h1>
-            <p
-              data-aos="fade-up"
-              data-aos-delay="100"
-              className="text-slate-600 md:text-md text-sm dark:text-slate-400"
-            >
-              We Seek out world changers and difference makers around the
-              globe,and equip them to fulfill their unique purpose.
-            </p>
+            <Fade delay={1e3} cascade damping={1e-1}>
+              <p
+                data-aos="fade-up"
+                data-aos-delay="100"
+                className="text-slate-600 md:text-md text-sm dark:text-slate-400"
+              >
+                We Seek out world changers and difference makers around the
+                globe,and equip them to fulfill their unique purpose.
+              </p>
+            </Fade>
             <div className="flex gap-3 justify-center md:justify-start">
               <NavLink
-                to={"/campaigns/dhaka"}
+                to={"/campaign/add"}
                 data-aos="zoom-out-down"
                 data-aos-delay="100"
                 className="btn btn-sm md:btn-md bg-emerald-700 text-white md:px-7 text-xs border hover:bg-emerald-800"
               >
-                Donate now
+                Add Your Campaign
               </NavLink>
               <NavLink
-                to={"/help"}
-                className="btn btn-sm bg-emerald-200 md:btn-md md:px-7 text-xs border hover:bg-slate-700 hover:text-white"
+                to={"/campaign/all"}
+                className="btn btn-sm bg-emerald-200 md:btn-md md:px-7 text-xs border hover:bg-emerald-300 "
               >
-                Browse Campaign
+                Browse Campaigns
               </NavLink>
             </div>
           </div>

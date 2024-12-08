@@ -72,36 +72,9 @@ export default function Navbar() {
     <div className="fixed w-full z-50 top-0 bg-white  dark:bg-slate-900  dark:border-gray-700">
       <div className="navbar container mx-auto text-black  dark:text-white">
         <div className="navbar-start">
-          <div className="dropdown">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn px-0 btn-ghost lg:hidden"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />
-              </svg>
-            </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 dark:bg-gray-800 rounded-box z-[1] mt-3 w-52 gap-2 p-2 shadow"
-            >
-              {links}
-            </ul>
-          </div>
-          <Link to={"/"} className="text-xl">
-            DaisyUI
+          <Link to={"/"} className="text-2xl font-bold flex gap-2 items-center">
+            <img className="w-12 h-12 object-cover" src="/zakat.png" alt="" />
+            <p className="mt-2 text-slate-800 dark:text-white">Crowdcube</p>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -133,15 +106,15 @@ export default function Navbar() {
               </div>
               <ul
                 tabIndex={0}
-                className="menu dark:bg-slate-900 menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                className="menu gap-2 px-2 dark:bg-slate-900 menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
               >
                 <li>
-                  <a className="justify-between">Profile</a>
+                  <a className="justify-between">{user?.displayName}</a>
                 </li>
                 <li>
-                  <a>Settings</a>
+                  <a>{user?.email}</a>
                 </li>
-                <li>
+                <li className="bg-red-500 text-white rounded-lg">
                   <a onClick={handleLogout}>Logout</a>
                 </li>
               </ul>
@@ -153,6 +126,21 @@ export default function Navbar() {
               </NavLink>
             </div>
           )}
+          <div className="dropdown">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn px-0 btn-ghost lg:hidden"
+            >
+              <i class="fa-solid fa-bars text-xl text-slate-800 dark:text-white"></i>
+            </div>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm left-[-200px] justify-start dropdown-content bg-base-100 dark:bg-gray-800 rounded-box z-[1] mt-3 w-52 gap-2 p-2 shadow"
+            >
+              {links}
+            </ul>
+          </div>
         </div>
       </div>
     </div>

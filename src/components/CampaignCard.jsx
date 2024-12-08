@@ -52,11 +52,13 @@ const CampaignCard = ({ campaign }) => {
         return toast.error("This data failed to delete");
       });
   };
-  const showUserInfo = () => {
-    document.getElementById("my_modal_2").showModal();
-  };
+
   return (
-    <div className=" from-white dark:border-slate-950 dark:from-slate-900 via-emerald-100 dark:via-slate-900 to-white dark:to-slate-900 bg-gradient-to-r border rounded-lg shadow-sm overflow-hidden hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+    <div
+      data-aos="zoom-in"
+      data-aos-anchor-placement="center-bottom"
+      className=" from-white dark:border-slate-950 dark:from-slate-900 via-emerald-100 dark:via-slate-900 to-white dark:to-slate-900 bg-gradient-to-r border rounded-lg shadow-sm overflow-hidden hover:shadow-md hover:-translate-y-1 transition-all duration-300"
+    >
       <dialog id="my_modal_1" className="modal">
         <div className="modal-box">
           <h3 className="font-bold text-lg">Hello!</h3>
@@ -76,37 +78,6 @@ const CampaignCard = ({ campaign }) => {
                 Confrim
               </button>
             </form>
-          </div>
-        </div>
-      </dialog>
-      <dialog id="my_modal_2" className="modal">
-        <div className="modal-box">
-          <h3 className="font-bold text-lg text-center">Raiser Information</h3>
-          <div className="py-4 flex flex-col items-center">
-            {/* User Image */}
-
-            {/* User Details */}
-            <div className="text-center">
-              <p className="font-semibold text-lg">
-                Name: {campaign?.user_name}
-              </p>
-              <p className="text-gray-600">Email: {campaign?.user_email}</p>
-              <p className="text-sm text-gray-500 mt-2">
-                {campaign?.createdAt}
-              </p>
-            </div>
-          </div>
-          <div className="modal-action justify-center space-x-4">
-            {/* Close Button */}
-            <form method="dialog">
-              <button
-                id="close"
-                className="btn bg-neutral outline-none text-white hover:bg-slate-800"
-              >
-                Close
-              </button>
-            </form>
-            {/* Confirm Button */}
           </div>
         </div>
       </dialog>
@@ -146,10 +117,7 @@ const CampaignCard = ({ campaign }) => {
 
         <p className="text-sm text-gray-600 mb-2 dark:text-slate-400">
           Status:{" "}
-          <span
-            onClick={showUserInfo}
-            className="hover:underline cursor-pointer"
-          >
+          <span className="hover:underline cursor-pointer">
             {deadline ? (
               <span className="text-green-500 font-semibold">Active</span>
             ) : (

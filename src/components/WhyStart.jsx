@@ -1,19 +1,27 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { Typewriter } from "react-simple-typewriter";
 
 export default function WhyStart() {
   return (
     <div>
       <div className="mb-5 space-y-2">
-        <h1 className="text-3xl font-bold text-center dark:text-white">
-          Ideas to get you started
+        <h1 className="lg:text-3xl text-2xl font-bold text-center dark:text-white">
+          <Typewriter words={["Ideas to get you started"]}></Typewriter>
         </h1>
-        <p className="text-gray-500 text-center dark:text-slate-400">
+        <p
+          data-aos="fade-up"
+          className="text-gray-500 text-center dark:text-slate-400"
+        >
           There are lots of ways to make good things happen
         </p>
       </div>
       <div className="grid md:grid-cols-2 grid-cols-1 gap-5">
-        <div className="border dark:border-slate-950 rounded-md shadow-sm hover:shadow-md p-6 flex gap-4 justify-between">
+        <div
+          data-aos="fade-up"
+          data-aos-anchor-placement="center-bottom"
+          className="border dark:border-slate-950 rounded-md shadow-sm hover:shadow-md p-6 flex gap-4 justify-between"
+        >
           {/* Text Section */}
           <div className="space-y-3">
             <h3 className="text-xl font-bold text-gray-800 dark:text-white ">
@@ -38,7 +46,11 @@ export default function WhyStart() {
           </div>
         </div>
 
-        <div className="border dark:border-slate-950 rounded-md shadow-sm hover:shadow-md p-6 flex gap-4 justify-between">
+        <div
+          data-aos="fade-up"
+          data-aos-anchor-placement="center-bottom"
+          className="border dark:border-slate-950 rounded-md shadow-sm hover:shadow-md p-6 flex gap-4 justify-between"
+        >
           {/* Text Section */}
           <div className="space-y-3">
             <h3 className="text-xl font-bold text-gray-800 dark:text-white">
@@ -62,7 +74,12 @@ export default function WhyStart() {
           </div>
         </div>
 
-        <div className="border dark:border-slate-950 rounded-md shadow-sm hover:shadow-md p-6 flex gap-4 justify-between">
+        <div
+          id="campaigns"
+          data-aos="fade-up"
+          data-aos-anchor-placement="center-bottom"
+          className="border dark:border-slate-950 rounded-md shadow-sm hover:shadow-md p-6 flex gap-4 justify-between"
+        >
           {/* Text Section */}
           <div className="space-y-3">
             <h3 className="text-xl font-bold text-gray-800 dark:text-white">
@@ -86,7 +103,11 @@ export default function WhyStart() {
           </div>
         </div>
 
-        <div className="border dark:border-slate-950 rounded-md shadow-sm hover:shadow-md p-6 flex gap-4 justify-between">
+        <div
+          data-aos="fade-up"
+          data-aos-anchor-placement="center-bottom"
+          className="border dark:border-slate-950 rounded-md shadow-sm hover:shadow-md p-6 flex gap-4 justify-between"
+        >
           {/* Text Section */}
           <div className="space-y-3">
             <h3 className="text-xl font-bold text-gray-800 dark:text-white">
