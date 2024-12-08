@@ -49,12 +49,12 @@ export default function MyDonations() {
                 />
               </figure>
               <div className="card-body">
+                <div className="badge dark:bg-green-500 bg-green-400 text-white text-xs dark:border-slate-800 ">
+                  {" "}
+                  {campaign?.campaign_type}
+                </div>
                 <h2 className="card-title dark:text-white">
                   {campaign?.campaign_title}
-                  <div className="badge dark:bg-green-500 bg-green-400 text-white text-xs dark:border-slate-800 ">
-                    {" "}
-                    {campaign?.campaign_type}
-                  </div>
                 </h2>
                 <div>
                   <p className="text-sm md:text-md dark:text-slate-400">
