@@ -1,5 +1,6 @@
+import { Alert } from "flowbite-react";
 import React, { useContext, useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { AuthContext } from "../contextApi/AuthContext";
 
 export default function MyDonations() {
@@ -27,53 +28,62 @@ export default function MyDonations() {
   return (
     <div className="min-h-fit">
       <main className="container mx-auto md:px-4 pb-8 grid lg:grid-cols-3 grid-cols-1 gap-4">
-        {data?.donations.length
-          ? data.donations.map((campaign) => (
-              <div className="card rounded-md bg-base-100 shadow-sm border">
-                <figure>
-                  <img
-                    className="min-h-32 object-cover bg-gray-50 w-full"
-                    src={campaign?.thumbnail}
-                    alt="Shoes"
-                  />
-                </figure>
-                <div className="card-body">
-                  <h2 className="card-title">
-                    {campaign?.campaign_title}
-                    <div className="badge bg-green-400 text-white">
-                      {" "}
-                      {campaign?.campaign_type}
-                    </div>
-                  </h2>
-                  <div>
-                    <p className="text-sm md:text-md">
-                      Amount:{" "}
-                      <span className="font-semibold">
-                        +${campaign?.donation_amount}
-                      </span>
-                    </p>
-                    <p className="text-sm md:text-md">
-                      Raiser Name:{" "}
-                      <span className="font-semibold">
-                        {campaign?.user_name}
-                      </span>
-                    </p>
-                    <p className="text-sm md:text-md">
-                      Raiser Email:{" "}
-                      <span className="font-semibold">
-                        {campaign?.user_email}
-                      </span>
-                    </p>
+        {data?.donations.length ? (
+          data.donations.map((campaign) => (
+            <div className="card rounded-md dark:border-slate-950 bg-base-100 dark:bg-slate-900 shadow-sm border">
+              <figure>
+                <img
+                  className="h-32 object-cover bg-gray-50 w-full"
+                  src={campaign?.thumbnail}
+                  alt="Shoes"
+                />
+              </figure>
+              <div className="card-body">
+                <h2 className="card-title dark:text-white">
+                  {campaign?.campaign_title}
+                  <div className="badge dark:bg-green-500 bg-green-400 text-white text-xs dark:border-slate-800 ">
+                    {" "}
+                    {campaign?.campaign_type}
                   </div>
-                  <div className="card-actions justify-start">
-                    <div className="shadow-sm border text-xs py-1 px-2 rounded-full bg-slate-50">
-                      {campaign?.createdAt}
-                    </div>
+                </h2>
+                <div>
+                  <p className="text-sm md:text-md dark:text-slate-400">
+                    Amount:{" "}
+                    <span className="font-semibold">
+                      +${campaign?.donation_amount}
+                    </span>
+                  </p>
+                  <p className="text-sm md:text-md dark:text-slate-400">
+                    Raiser Name:{" "}
+                    <span className="font-semibold">{campaign?.user_name}</span>
+                  </p>
+                  <p className="text-sm md:text-md dark:text-slate-400">
+                    Raiser Email:{" "}
+                    <span className="font-semibold">
+                      {campaign?.user_email}
+                    </span>
+                  </p>
+                </div>
+                <div className="card-actions justify-start">
+                  <div className="shadow-sm border text-xs py-1 px-3 rounded-full bg-slate-50 dark:bg-slate-600 dark:text-white dark:border-slate-950">
+                    {campaign?.createdAt}
                   </div>
                 </div>
               </div>
-            ))
-          : "No data"}
+            </div>
+          ))
+        ) : (
+          <Alert color="success" rounded className=" col-span-3">
+            <span className="font-medium">Sorry!</span> There have no donation
+            data.{" "}
+            <NavLink
+              className="text-yellow-700 hover:underline"
+              to={"/campaign/all"}
+            >
+              Donate now
+            </NavLink>
+          </Alert>
+        )}
       </main>
     </div>
   );

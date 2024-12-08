@@ -70,7 +70,7 @@ export default function Navbar() {
 
   return (
     <div className="fixed w-full z-50 top-0 bg-white  dark:bg-slate-900  dark:border-gray-700">
-      <div className="navbar container mx-auto text-black dark:text-white">
+      <div className="navbar container mx-auto text-black  dark:text-white">
         <div className="navbar-start">
           <div className="dropdown">
             <div
@@ -118,7 +118,7 @@ export default function Navbar() {
             ></i>
           </button>
           {user ? (
-            <div title={user?.displayName} className="dropdown dropdown-end">
+            <div title={user?.displayName} className="dropdown dropdown-end ">
               <div
                 tabIndex={0}
                 role="button"
@@ -127,32 +127,29 @@ export default function Navbar() {
                 <div className="w-10 rounded-full">
                   <img
                     alt="Tailwind CSS Navbar component"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                    src={user?.photoURL}
                   />
                 </div>
               </div>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                className="menu dark:bg-slate-900 menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
               >
                 <li>
-                  <a className="justify-between">
-                    Profile
-                    <span className="badge">New</span>
-                  </a>
+                  <a className="justify-between">Profile</a>
                 </li>
                 <li>
                   <a>Settings</a>
                 </li>
                 <li>
-                  <a>Logout</a>
+                  <a onClick={handleLogout}>Logout</a>
                 </li>
               </ul>
             </div>
           ) : (
             <div>
               <NavLink to={"/auth/login"} className="btn btn-sm">
-                Login
+                Get start
               </NavLink>
             </div>
           )}

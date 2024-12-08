@@ -17,7 +17,7 @@ export default function AllCampaign() {
   }, [result]);
   console.log(allCampaigns);
   return (
-    <div className="min-h-fit shadow-sm border dark:border-slate-800">
+    <div className="min-h-fit shadow-sm border dark:border-slate-800 ">
       <main className="container mx-auto px-4 py-8">
         <div className="flex justify-between gap-2 mb-4 items-center">
           <input

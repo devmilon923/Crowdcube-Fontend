@@ -1,5 +1,6 @@
+import { Alert } from "flowbite-react";
 import { useContext, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import Banner from "../components/Banner";
 import CampaignCard from "../components/CampaignCard";
 import FundraisingStep from "../components/FundraisingStep";
@@ -37,7 +38,15 @@ export default function Home() {
               <CampaignCard campaign={campaign} key={campaign._id} />
             ))
           ) : (
-            <div>No data </div>
+            <Alert color="success" rounded className=" col-span-3">
+              There have no active campaign running.{" "}
+              <NavLink
+                className="text-yellow-700 hover:underline"
+                to={"/campaign/add"}
+              >
+                Create your own campaign
+              </NavLink>
+            </Alert>
           )}
         </div>
       </div>

@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../firebase/firebaseSDK";
@@ -46,6 +47,9 @@ export const ContextProvider = ({ children }) => {
   const epcreate = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
+  const update = (obj) => {
+    return updateProfile(auth.currentUser, obj);
+  };
   const eplogin = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
@@ -66,6 +70,7 @@ export const ContextProvider = ({ children }) => {
         epcreate,
         eplogin,
         logout,
+        update,
       }}
     >
       {children}

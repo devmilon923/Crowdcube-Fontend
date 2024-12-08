@@ -7,6 +7,7 @@ import MyDonations from "../components/MyDonations";
 import UpdateCampaign from "../components/UpdateCampaign";
 import Main from "../layouts/Main";
 import Home from "../pages/Home";
+import NotFound404 from "../pages/NotFound404";
 import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
 import PrivateRoute from "./PrivateRoute";
@@ -16,6 +17,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
+    errorElement: <NotFound404 />,
     children: [
       {
         path: "/",
@@ -73,23 +75,28 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+        path: "/auth/login",
+        element: (
+          <PublicRoute>
+            <Login />
+          </PublicRoute>
+        ),
+      },
+      {
+        path: "/auth/register",
+        element: (
+          <PublicRoute>
+            <Register />
+          </PublicRoute>
+        ),
+      },
     ],
   },
+
   {
-    path: "/auth/login",
-    element: (
-      <PublicRoute>
-        <Login />
-      </PublicRoute>
-    ),
-  },
-  {
-    path: "/auth/register",
-    element: (
-      <PublicRoute>
-        <Register />
-      </PublicRoute>
-    ),
+    path: "*",
+    element: <NotFound404 />,
   },
   // register
 ]);

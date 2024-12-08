@@ -1,11 +1,14 @@
-import React, { useContext } from "react";
+import { Spinner } from "flowbite-react";
+import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../contextApi/AuthContext";
 import { DataContext } from "../contextApi/DataContext";
 export default function AddNewCampaign() {
+  const [btnLoader, setloader] = useState(false);
   const { user } = useContext(AuthContext);
   const { homeData, setHomeData } = useContext(DataContext);
   const handleSubmit = async (e) => {
+    setloader(true);
     e.preventDefault();
     const photo = e.target.photo.files;
     if (
@@ -13,18 +16,23 @@ export default function AddNewCampaign() {
       e.target.description.value.trim() === "" ||
       e.target.campaign_type.value.trim() === ""
     ) {
+      setloader(false);
       return toast.error("Empty space are not allowed");
     }
 
-    if (parseInt(e.target.goal_amount.value) <= 0)
+    if (parseInt(e.target.goal_amount.value) <= 0) {
+      setloader(false);
       return toast.error("Invalid goal amount");
+    }
 
     if (
       parseInt(e.target.goal_amount.value) <
       parseInt(e.target.min_donation_amount.value)
-    )
+    ) {
+      setloader(false);
       return toast.error("Minimum donation amount to high");
-    if (photo.length === 0) return;
+    }
+    if (photo.length === 0) return setloader(false);
     const data = new FormData();
     data.append("file", photo[0]);
     data.append("upload_preset", "crowdcube");
@@ -61,11 +69,13 @@ export default function AddNewCampaign() {
         .then((res) => res.json())
         .then((data) => {
           setHomeData([...homeData, data]);
-          console.log(data);
-          toast.success("Campaign success to add");
+          setloader(false);
+
+          toast.success("Campaign successfully added");
           e.target.reset();
         })
         .catch((err) => {
+          setloader(false);
           toast.error("Campaign failed to add");
           console.log(err);
         });
@@ -73,9 +83,9 @@ export default function AddNewCampaign() {
     // console.log(campaignData);
   };
   return (
-    <div className=" flex items-center  justify-center pb-14">
-      <div className="max-w-3xl w-full bg-white dark:bg-slate-900 rounded-lg shadow-sm  border-none p-2 md:p-8">
-        <h1 className="text-2xl font-bold text-gray-800 dark:bg-slate-900 dark:border-slate-700 mb-6 text-center">
+    <div className=" flex items-center  justify-center">
+      <div className="max-w-3xl w-full bg-white dark:bg-slate-900 rounded-lg shadow-sm  border-none p-2 md:px-8 pt-0 pb-8">
+        <h1 className="text-2xl font-bold text-gray-800 dark:bg-slate-900 dark:border-slate-700 mb-6 text-center dark:text-white">
           Add New Campaign
         </h1>
 
@@ -89,7 +99,7 @@ export default function AddNewCampaign() {
               type="text"
               name="campaign_title"
               required
-              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 dark:bg-slate-900 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 dark:text-slate-400 dark:bg-slate-900 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Enter campaign title"
             />
           </div>
@@ -101,7 +111,7 @@ export default function AddNewCampaign() {
             <select
               required
               name="campaign_type"
-              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-slate-400 dark:bg-slate-900 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-slate-400 dark:bg-slate-900 dark:border-slate-700 focus:outline-none dark:text-slate-400 focus:ring-2 focus:ring-green-500"
             >
               <option defaultValue="" disabled selected>
                 Select a category
@@ -119,7 +129,7 @@ export default function AddNewCampaign() {
               Campaign Description
             </label>
             <textarea
-              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 dark:bg-slate-900 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 dark:bg-slate-900 dark:border-slate-700 focus:outline-none focus:ring-2 dark:text-slate-400 focus:ring-green-500"
               rows="4"
               required
               name="description"
@@ -135,7 +145,7 @@ export default function AddNewCampaign() {
               type="number"
               name="goal_amount"
               required
-              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 dark:bg-slate-900 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 dark:text-slate-400 dark:bg-slate-900 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Enter goal amount"
             />
           </div>
@@ -148,7 +158,7 @@ export default function AddNewCampaign() {
               type="number"
               name="min_donation_amount"
               required
-              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 dark:bg-slate-900 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full dark:text-slate-400 border border-gray-300 rounded-lg py-2 px-3 text-gray-800 dark:bg-slate-900 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Enter minimum donation amount"
             />
           </div>
@@ -161,7 +171,7 @@ export default function AddNewCampaign() {
               type="date"
               name="deadline"
               required
-              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 dark:bg-slate-900 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full dark:text-slate-400 border border-gray-300 rounded-lg py-2 px-3 text-gray-800 dark:bg-slate-900 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-green-500"
             />
           </div>
           {/* Image Upload */}
@@ -173,7 +183,7 @@ export default function AddNewCampaign() {
               type="file"
               name="photo"
               required
-              className="w-full text-gray-800 dark:bg-slate-900 dark:border-slate-700 file-input file-input-sm rounded-none file-input-bordered"
+              className="w-full dark:text-slate-400 text-gray-800 dark:bg-slate-900 dark:border-slate-700 file-input file-input-sm rounded-none file-input-bordered"
               accept="image/*"
             />
           </div>
@@ -182,11 +192,19 @@ export default function AddNewCampaign() {
             <p className="text-sm">Email: {user?.email}</p>
           </div>
           {/* Submit Button */}
+
           <button
             type="submit"
             className="w-full dark:border-slate-700 bg-green-600 text-white font-semibold btn rounded-lg hover:bg-green-700 transition duration-300"
           >
-            Submit Campaign
+            {btnLoader ? (
+              <div className="flex items-center">
+                <Spinner aria-label="Spinner button example" size="sm" />
+                <span className="pl-3">Loading...</span>
+              </div>
+            ) : (
+              "Submit"
+            )}
           </button>
         </form>
       </div>
