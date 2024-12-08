@@ -72,9 +72,12 @@ export default function Navbar() {
     <div className="fixed w-full z-50 top-0 bg-white  dark:bg-slate-900  dark:border-gray-700">
       <div className="navbar container mx-auto text-black  dark:text-white">
         <div className="navbar-start">
-          <Link to={"/"} className="text-2xl font-bold flex gap-2 items-center">
+          <Link
+            to={"/"}
+            className="lg:text-2xl text-xl font-bold flex gap-2 items-center"
+          >
             <img className="w-12 h-12 object-cover" src="/zakat.png" alt="" />
-            <p className="mt-2 text-slate-800 dark:text-white">Crowdcube</p>
+            <p className="mt-3 text-slate-800 dark:text-white">Crowdcube</p>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -121,9 +124,9 @@ export default function Navbar() {
             </div>
           ) : (
             <div>
-              <NavLink to={"/auth/login"} className="btn btn-sm">
+              <Link to={"/auth/login"} className="btn btn-sm ">
                 Get start
-              </NavLink>
+              </Link>
             </div>
           )}
           <div className="dropdown">

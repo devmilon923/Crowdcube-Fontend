@@ -58,7 +58,7 @@ export const ContextProvider = ({ children }) => {
     return signOut(auth);
   };
 
-  console.log(user);
+
   return (
     <AuthContext.Provider
       value={{

@@ -33,8 +33,6 @@ export default function MyCampaign() {
     }, [location.pathname]);
   }
 
-  console.log(myCampaigns);
-
   // Update filtered campaigns on myCampaigns or searchQuery change
   useEffect(() => {
     if (searchQuery.trim()) {

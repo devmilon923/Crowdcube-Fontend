@@ -22,7 +22,7 @@ export default function Home() {
         setHomeData(data?.data);
       });
   }, [location.pathname, user?.uid]);
-  console.log(homeData);
+ 
   return (
     <>
       <Banner />

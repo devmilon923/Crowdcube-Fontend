@@ -85,10 +85,10 @@ export default function AddNewCampaign() {
         .catch((err) => {
           setloader(false);
           toast.error("Campaign failed to add");
-          console.log(err);
+        
         });
     }
-    // console.log(campaignData);
+  
   };
   return (
     <div className=" flex items-center  justify-center">

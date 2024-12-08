@@ -26,7 +26,7 @@ export default function Tr({ campaign }) {
         return toast.success("This data success to delete");
       })
       .catch((err) => {
-        console.log(err);
+
         return toast.error("This data failed to delete");
       });
   };

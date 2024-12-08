@@ -80,8 +80,8 @@ export default function UpdateCampaign() {
         })
         .catch((err) => {
           setloader(false);
-          toast.error("Campaign failed to update");
-          return console.log(err);
+          return  toast.error("Campaign failed to update");
+          
         });
     } else {
       // Image upload start to cloudinary =============
@@ -126,7 +126,7 @@ export default function UpdateCampaign() {
           .catch((err) => {
             setloader(false);
             toast.error("Campaign failed to update");
-            return console.log(err);
+          
           });
       } else {
         setloader(false);
