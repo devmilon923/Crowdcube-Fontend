@@ -27,8 +27,8 @@ export const router = createBrowserRouter([
       },
       {
         path: "/campaign/all",
-        loader: () => fetch(`${import.meta.env.VITE_apiUrl}/campaign/all`),
         element: <AllCampaign />,
+        loader: () => fetch(`${import.meta.env.VITE_apiUrl}/campaign/all`),
       },
 
       {
@@ -99,5 +99,4 @@ export const router = createBrowserRouter([
     path: "*",
     element: <NotFound404 />,
   },
-
 ]);

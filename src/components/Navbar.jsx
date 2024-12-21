@@ -135,7 +135,7 @@ export default function Navbar() {
               role="button"
               className="btn px-0 btn-ghost lg:hidden"
             >
-              <i class="fa-solid fa-bars text-xl text-slate-800 dark:text-white"></i>
+              <i className="fa-solid fa-bars text-xl text-slate-800 dark:text-white"></i>
             </div>
             <ul
               tabIndex={0}

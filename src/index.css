@@ -5,5 +5,7 @@ html {
   overflow-y: scroll;
 }
 .active {
-  background-color: #0e9f6e !important;
+  background-color: #2f4f4f !important; /* Your preferred color */
+  color: #fff;
+  border-radius: 5px;
 }
