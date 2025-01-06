@@ -46,19 +46,14 @@ export default function Navbar() {
       <li>
         <NavLink to={"/campaign/all"}>All Campaign</NavLink>
       </li>
-      {user && (
-        <>
-          <li>
-            <NavLink to={"/campaign/add"}>Add New Campaign</NavLink>
-          </li>
-          <li>
-            <NavLink to={"/campaign/me"}>My Campaign</NavLink>
-          </li>
-          <li>
-            <NavLink to={"/donations/me"}>My Donations</NavLink>
-          </li>
-        </>
-      )}
+
+      <li>
+        <NavLink to={"/about-us"}>About Us</NavLink>
+      </li>
+
+      <li>
+        <NavLink to={"/contact-us"}>Support Us</NavLink>
+      </li>
     </>
   );
 
@@ -107,20 +102,28 @@ export default function Navbar() {
                   />
                 </div>
               </div>
-              <ul
+
+              <div
                 tabIndex={0}
                 className="menu gap-2 px-2 dark:bg-slate-900 menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
               >
+                <div className="bg-gray-50 grid p-3 text-xs dark:bg-slate-800 rounded-md dark:border-slate-800 border">
+                  <p className="justify-between">{user?.displayName}</p>
+                  <p>{user?.email}</p>
+                </div>
                 <li>
-                  <a className="justify-between">{user?.displayName}</a>
+                  <NavLink to={"/campaign/add"}>Add New Campaign</NavLink>
                 </li>
                 <li>
-                  <a>{user?.email}</a>
+                  <NavLink to={"/campaign/me"}>My Campaign</NavLink>
+                </li>
+                <li>
+                  <NavLink to={"/donations/me"}>My Donations</NavLink>
                 </li>
                 <li className="bg-red-500 text-white rounded-lg">
                   <a onClick={handleLogout}>Logout</a>
                 </li>
-              </ul>
+              </div>
             </div>
           ) : (
             <div>

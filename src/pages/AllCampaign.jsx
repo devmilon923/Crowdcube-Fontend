@@ -1,15 +1,13 @@
 import { Table } from "flowbite-react";
 import React, { useContext, useEffect, useState } from "react";
-import { NavLink, useLoaderData, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { DataContext } from "../contextApi/DataContext";
 
 export default function AllCampaign() {
   const { setAllCampaigns, allCampaigns } = useContext(DataContext);
-
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredCampaigns, setFilteredCampaigns] = useState([]);
 
-  const result = useLoaderData();
   const location = useLocation();
 
   useEffect(() => {
@@ -19,12 +17,11 @@ export default function AllCampaign() {
     document.title = "View All Campaigns | Crowdcube";
   }, []);
   useEffect(() => {
-    if (result.data.length > 0) {
-      setAllCampaigns(result.data);
-    } else {
-      setAllCampaigns([]);
-    }
-  }, [result]);
+    fetch(`${import.meta.env.VITE_apiUrl}/campaign/all`)
+      .then((res) => res.json())
+      .then((data) => setAllCampaigns(data.data))
+      .catch((err) => console.log(err));
+  }, [location.pathname]);
 
   // Update filtered campaigns on allCampaigns or searchQuery change
   useEffect(() => {

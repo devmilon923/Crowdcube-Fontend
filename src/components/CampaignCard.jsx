@@ -105,7 +105,7 @@ const CampaignCard = ({ campaign }) => {
           <div className="">
             <NavLink
               to={`/campaign/details/${campaign._id}`}
-              className="w-full btn bg-green-500 dark:bg-green-600 dark:border-slate-700 btn-sm text-white font-semibold rounded-md text-xs hover:bg-green-600 transition duration-300"
+              className="w-full btn bg-green-500 dark:bg-green-600 dark:border-slate-700 btn-sm text-white font-semibold rounded-full text-xs hover:bg-green-600 transition duration-300"
             >
               See More
             </NavLink>
