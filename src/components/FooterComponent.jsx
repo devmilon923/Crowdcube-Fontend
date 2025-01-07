@@ -1,6 +1,9 @@
 import { Footer } from "flowbite-react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../contextApi/AuthContext";
 export default function FooterComponent() {
+  const { user } = useContext(AuthContext);
   return (
     <div className="">
       <Footer container className="bg-gray-50">
@@ -14,11 +17,16 @@ export default function FooterComponent() {
                 <span className="text-green-600">Crowd</span>cube
               </p>
             </Link>
-            <Footer.LinkGroup>
-              <Footer.Link>About</Footer.Link>
-              <Footer.Link>Privacy Policy</Footer.Link>
-              <Footer.Link>Licensing</Footer.Link>
-              <Footer.Link>Contact</Footer.Link>
+            <Footer.LinkGroup className="gap-5">
+              <Link to="/about-us">About us</Link>
+
+              <Link to="/faq">FAQ</Link>
+              <Link to="/campaign/all">All Campaigns</Link>
+              {user ? (
+                <Link to="/campaign/me">My Campaigns</Link>
+              ) : (
+                <Link to="/auth/login">Get start</Link>
+              )}
             </Footer.LinkGroup>
           </div>
           <Footer.Divider />
