@@ -44,7 +44,7 @@ export default function Navbar() {
         <NavLink to={"/"}>Home</NavLink>
       </li>
       <li>
-        <NavLink to={"/campaign/all"}>All Campaign</NavLink>
+        <NavLink to={"/campaign/all"}>Campaigns</NavLink>
       </li>
 
       <li>
@@ -125,7 +125,7 @@ export default function Navbar() {
                     My Donations
                   </NavLink>
                 </li>
-                <li className="bg-red-50 dark:bg-gray-800 border hover:bg-red-400 border-red-300 hover:text-white text-dark rounded-full">
+                <li className="bg-red-50 dark:bg-gray-800 border hover:!bg-red-400 border-red-300 hover:text-white text-dark rounded-full">
                   <a onClick={handleLogout}>Logout</a>
                 </li>
               </div>

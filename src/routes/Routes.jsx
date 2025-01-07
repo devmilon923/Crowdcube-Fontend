@@ -1,9 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import Main from "../layouts/Main";
+import About from "../pages/About";
 import AddNewCampaign from "../pages/AddNewCampaign";
 import AllCampaign from "../pages/AllCampaign";
 import CampaignDetails from "../pages/CampaignDetails";
+import FAQ from "../pages/FAQ";
 import Home from "../pages/Home";
 import MyCampaign from "../pages/MyCampaign";
 import MyDonations from "../pages/MyDonations";
@@ -28,6 +30,14 @@ export const router = createBrowserRouter([
       {
         path: "/campaign/all",
         element: <AllCampaign />,
+      },
+      {
+        path: "/faq",
+        element: <FAQ />,
+      },
+      {
+        path: "/about-us",
+        element: <About />,
       },
 
       {
