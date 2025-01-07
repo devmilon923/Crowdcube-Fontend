@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function NotFound404() {
   useEffect(() => {
@@ -29,9 +29,9 @@ export default function NotFound404() {
         </div>
         <p className="mt-4 text-gray-600">
           Let's get you back{" "}
-          <NavLink to={"/"} className="text-blue-500">
+          <Link to={"/"} className="text-blue-500">
             home
-          </NavLink>
+          </Link>
           .
         </p>
       </div>

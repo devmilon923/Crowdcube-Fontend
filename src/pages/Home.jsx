@@ -3,6 +3,7 @@ import { useContext, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import Banner from "../components/Banner";
 import CampaignCard from "../components/CampaignCard";
+import CatagorySectons from "../components/CatagorySectons";
 import FundraisingStep from "../components/FundraisingStep";
 import WhyStart from "../components/WhyStart";
 import { AuthContext } from "../contextApi/AuthContext";
@@ -22,15 +23,18 @@ export default function Home() {
         setHomeData(data?.data);
       });
   }, [location.pathname, user?.uid]);
- 
+
   return (
     <>
       <Banner />
+      <div className="pt-14">
+        <CatagorySectons />
+      </div>
       <div className="py-14">
         <WhyStart />
       </div>
 
-      <div >
+      <div>
         <h1
           data-aos="flip-up"
           data-aos-anchor-placement="top-center"

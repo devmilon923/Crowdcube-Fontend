@@ -80,8 +80,7 @@ export default function UpdateCampaign() {
         })
         .catch((err) => {
           setloader(false);
-          return  toast.error("Campaign failed to update");
-          
+          return toast.error("Campaign failed to update");
         });
     } else {
       // Image upload start to cloudinary =============
@@ -126,7 +125,6 @@ export default function UpdateCampaign() {
           .catch((err) => {
             setloader(false);
             toast.error("Campaign failed to update");
-          
           });
       } else {
         setloader(false);
@@ -175,6 +173,9 @@ export default function UpdateCampaign() {
               </option>
               <option selected={currentData?.campaign_type === "Education"}>
                 Education
+              </option>
+              <option selected={currentData?.campaign_type === "Startup"}>
+                Startup
               </option>
               <option selected={currentData?.campaign_type === "Environment"}>
                 Environment

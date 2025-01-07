@@ -38,13 +38,13 @@ export default function Banner() {
                 to={"/campaign/add"}
                 data-aos="zoom-out-down"
                 data-aos-delay="100"
-                className="btn btn-sm md:btn-md bg-emerald-700 text-white md:px-7 text-xs border hover:bg-emerald-800"
+                className="btn  md:btn-md bg-emerald-700 text-white md:px-7 text-xs border hover:bg-emerald-800"
               >
                 Add Your Campaign
               </NavLink>
               <NavLink
                 to={"/campaign/all"}
-                className="btn btn-sm bg-emerald-200 md:btn-md md:px-7 text-xs border hover:bg-emerald-300 "
+                className="btn  bg-emerald-200 md:btn-md md:px-7 text-xs border hover:bg-emerald-300 "
               >
                 Browse Campaigns
               </NavLink>

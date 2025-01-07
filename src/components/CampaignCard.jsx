@@ -88,7 +88,7 @@ const CampaignCard = ({ campaign }) => {
         {user?.uid === campaign.user_uid ? (
           <div className="grid grid-cols-2 gap-3">
             <NavLink
-              className="className=w-full btn btn-sm text-xs bg-white dark:bg-slate-800 dark:border-slate-900 border shadow-sm  text-green-600 font-semibold rounded-md hover:bg-green-300 transition duration-300"
+              className="w-full btn btn-sm text-xs bg-white dark:bg-slate-800 dark:border-slate-900 border shadow-sm  text-green-600 font-semibold rounded-full hover:bg-green-300 transition duration-300"
               to={`/campaign/details/${campaign._id}`}
             >
               <i className="fa-regular fa-eye"></i>
@@ -96,7 +96,7 @@ const CampaignCard = ({ campaign }) => {
 
             <NavLink
               to={`/campaign/update/${campaign._id}`}
-              className="w-full dark:bg-slate-800 dark:border-slate-900 btn btn-sm text-xs bg-white border shadow-sm text-emerald-600 font-semibold rounded-md hover:bg-green-300 transition duration-300"
+              className="w-full dark:bg-slate-800 dark:border-slate-900 btn btn-sm text-xs bg-white border shadow-sm text-emerald-600 font-semibold rounded-full hover:bg-green-300 transition duration-300"
             >
               <i className="fa-regular fa-pen-to-square"></i>
             </NavLink>

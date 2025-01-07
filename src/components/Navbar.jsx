@@ -52,7 +52,7 @@ export default function Navbar() {
       </li>
 
       <li>
-        <NavLink to={"/contact-us"}>Support Us</NavLink>
+        <NavLink to={"/faq"}>FAQ</NavLink>
       </li>
     </>
   );
@@ -67,12 +67,11 @@ export default function Navbar() {
     <div className="fixed w-full z-50 top-0 bg-white  dark:bg-slate-900  dark:border-gray-700">
       <div className="navbar container mx-auto text-black  dark:text-white">
         <div className="navbar-start">
-          <Link
-            to={"/"}
-            className="lg:text-2xl text-xl font-bold flex gap-2 items-center"
-          >
-            <img className="w-12 h-12 object-cover" src="/zakat.png" alt="" />
-            <p className="mt-3 text-slate-800 dark:text-white">Crowdcube</p>
+          <Link to={"/"} className="text-2xl font-bold flex gap-2 items-center">
+            {/* <img className="w-12 h-12 object-cover" src="/zakat.png" alt="" /> */}
+            <p className="mt-3 text-slate-800 dark:text-white">
+              <span className="text-green-600">Crowd</span>cube
+            </p>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -112,15 +111,21 @@ export default function Navbar() {
                   <p>{user?.email}</p>
                 </div>
                 <li>
-                  <NavLink to={"/campaign/add"}>Add New Campaign</NavLink>
+                  <NavLink className="hover:rounded-full" to={"/campaign/add"}>
+                    Add New Campaign
+                  </NavLink>
                 </li>
                 <li>
-                  <NavLink to={"/campaign/me"}>My Campaign</NavLink>
+                  <NavLink className="hover:rounded-full" to={"/campaign/me"}>
+                    My Campaign
+                  </NavLink>
                 </li>
                 <li>
-                  <NavLink to={"/donations/me"}>My Donations</NavLink>
+                  <NavLink className="hover:rounded-full" to={"/donations/me"}>
+                    My Donations
+                  </NavLink>
                 </li>
-                <li className="bg-red-500 text-white rounded-lg">
+                <li className="bg-red-50 dark:bg-gray-800 border hover:bg-red-400 border-red-300 hover:text-white text-dark rounded-full">
                   <a onClick={handleLogout}>Logout</a>
                 </li>
               </div>

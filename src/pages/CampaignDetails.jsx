@@ -167,13 +167,9 @@ const CampaignDetails = () => {
               {deadline ? (
                 <div>
                   {details?.user_uid === user?.uid ? (
-                    <button
-                      disabled
-                      type="submit"
-                      className="w-full btn bg-green-500 dark:bg-green-600 dark:border-slate-700 text-white font-semibold rounded-lg hover:bg-green-600 transition duration-300"
-                    >
-                      Your campaign
-                    </button>
+                    <p className="text-red-500 text-center text-sm">
+                      You can't donate your own campaign
+                    </p>
                   ) : (
                     <button
                       type="submit"

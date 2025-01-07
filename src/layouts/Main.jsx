@@ -15,7 +15,7 @@ export default function Main() {
     <div className="dark:bg-slate-900">
       <Toaster position="top-center" reverseOrder={false} />
       <Navbar />
-      <div className="container overflow-hidden mx-auto px-3 pt-24 min-h-[calc(100vh-165px)] pb-14">
+      <div className="container overflow-hidden mx-auto px-3 pt-20 md:pt-24 min-h-[calc(100vh-165px)] pb-14">
         <Outlet />
       </div>
       <Footer />

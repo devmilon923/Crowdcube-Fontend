@@ -96,7 +96,7 @@ export default function Tr({ campaign }) {
       <Table.Cell>${campaign?.goal_amount}</Table.Cell>
       <Table.Cell>${campaign?.current_balance}</Table.Cell>
       <Table.Cell>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-1">
+        <div className="grid grid-cols-1 gap-3 lg:grid-cols-2 ">
           <Link
             to={`/campaign/update/${campaign?._id}`}
             className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
